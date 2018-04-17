@@ -43,7 +43,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="addIngredient:" destination="9pv-A4-QxB" eventType="touchUpInside" id="Dtq-UB-Cmz"/>
+                                    <action selector="addIngredientToList:" destination="9pv-A4-QxB" eventType="touchUpInside" id="hYk-sw-mgw"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iIi-26-R14">
@@ -95,7 +95,7 @@
                                     <constraint firstAttribute="height" constant="80" id="bME-5h-RAP"/>
                                     <constraint firstAttribute="width" constant="250" id="pUr-A1-VSZ"/>
                                 </constraints>
-                                <state key="normal" title="Search for recipe">
+                                <state key="normal" title="Search for recipes">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -165,10 +165,10 @@
             </objects>
             <point key="canvasLocation" x="924" y="-318.89055472263868"/>
         </scene>
-        <!--DetailRecipe-->
+        <!--ListRecipe-->
         <scene sceneID="c11-1v-ALr">
             <objects>
-                <viewControllerPlaceholder storyboardName="DetailRecipe" id="65T-Cw-U1b" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="ListRecipe" id="65T-Cw-U1b" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zXU-MP-tMc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2262" y="-320"/>

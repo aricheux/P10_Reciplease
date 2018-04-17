@@ -6,19 +6,20 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Detail Recipe Controller-->
+        <!--List Recipe Controller-->
         <scene sceneID="q8y-Ay-ZgG">
             <objects>
-                <tableViewController id="6Jj-Of-nC2" customClass="DetailRecipeController" customModule="P10_Reciplease" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="6Jj-Of-nC2" customClass="ListRecipeController" customModule="P10_Reciplease" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZGR-Fo-kBU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="100" id="5pY-jQ-Llb" customClass="RecipeTableViewCell" customModule="P10_Reciplease" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="100" id="5pY-jQ-Llb" customClass="ListRecipeCell" customModule="P10_Reciplease" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5pY-jQ-Llb" id="C2s-WT-JHl">
@@ -32,10 +33,28 @@
                             <outlet property="delegate" destination="6Jj-Of-nC2" id="0GO-ZO-KMu"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="rP1-LM-jCW" kind="show" id="yWr-7X-f1F"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TCa-mS-EYh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2413.5999999999999" y="-319.79010494752629"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="86k-Vm-hzT">
+            <objects>
+                <viewController id="rP1-LM-jCW" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tkp-So-xFJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="FtJ-X1-P0N"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g0X-xT-g8Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3161" y="-320"/>
         </scene>
     </scenes>
 </document>

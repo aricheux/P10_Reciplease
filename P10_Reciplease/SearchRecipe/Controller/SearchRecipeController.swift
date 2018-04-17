@@ -25,7 +25,7 @@ class SearchRecipeController: UIViewController, UITableViewDelegate, UITableView
         recipeList.reloadData()
     }
 
-    @IBAction func addIngredient(_ sender: Any) {
+    @IBAction func addIngredientToList(_ sender: Any) {
         RecipeManager.sharedInstance.addIngredient(ingredientText.text)
         self.ingredientText.text = ""
         recipeList.reloadData()
