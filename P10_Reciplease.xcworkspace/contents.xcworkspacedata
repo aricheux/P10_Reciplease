@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/Antoine/Documents/_02Formation/P10_Reciplease/P10_Reciplease/P10_Reciplease/SearchRecipe/Controller/RecipeTableViewCell.swift">
+   </FileRef>
+   <FileRef
       location = "group:P10_Reciplease.xcodeproj">
    </FileRef>
    <FileRef
