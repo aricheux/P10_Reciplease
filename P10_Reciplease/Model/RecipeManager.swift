@@ -15,12 +15,15 @@ class RecipeManager {
     /// Share the RecipeManager to all project, no need to create object in code
     static let sharedInstance = RecipeManager()
     /// yummly app id and key
-    let yummlyAppId = "11f579f1"
-    let yummlyAppKey = "776a26da022bbda59c4b88b299352015"
+    private let yummlyAppId = "11f579f1"
+    private let yummlyAppKey = "776a26da022bbda59c4b88b299352015"
+    ///
+    var ingredients = [String()]
+    var ingredientList = String()
     
-    func searchRecipe(with param: String, completion: @escaping (JSON, Error?) -> ()) {
+    func searchRecipe(completion: @escaping (JSON, Error?) -> ()) {
         let yummyUrl = "http://api.yummly.com/v1/api/recipes?"
-        let parameters = ["_app_id": yummlyAppId, "_app_key": yummlyAppKey, "q": param, "requirePictures": "true"]
+        let parameters = ["_app_id": yummlyAppId, "_app_key": yummlyAppKey, "q": ingredientList, "requirePictures": "true"]
         
         Alamofire.request(yummyUrl, method: .get, parameters: parameters, encoding: URLEncoding.default).responseJSON { response in
             switch response.result {
@@ -31,6 +34,23 @@ class RecipeManager {
             case .failure(let error):
                 completion(JSON.null, error)
             }
+        }
+    }
+    
+    func addIngredient(_ ingredient: String){
+        ingredients.append(ingredient)
+        formatIngredientInList()
+    }
+    
+    func clearIngredientList() {
+        ingredients = []
+        ingredientList = ""
+    }
+    
+    func formatIngredientInList() {
+        ingredientList = ""
+        for ingredient in ingredients {
+            ingredientList += ingredient + "&"
         }
     }
 }
