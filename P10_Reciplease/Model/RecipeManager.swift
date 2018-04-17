@@ -18,7 +18,7 @@ class RecipeManager {
     private let yummlyAppId = "11f579f1"
     private let yummlyAppKey = "776a26da022bbda59c4b88b299352015"
     ///
-    var ingredients = [String()]
+    var ingredients: [String] = []
     var ingredientList = String()
     
     func searchRecipe(completion: @escaping (JSON, Error?) -> ()) {
@@ -37,9 +37,11 @@ class RecipeManager {
         }
     }
     
-    func addIngredient(_ ingredient: String){
-        ingredients.append(ingredient)
-        formatIngredientInList()
+    func addIngredient(_ ingredient: String?){
+        if let strIngredient = ingredient {
+            ingredients.append(strIngredient)
+            formatIngredientInList()
+        }
     }
     
     func clearIngredientList() {
@@ -49,8 +51,12 @@ class RecipeManager {
     
     func formatIngredientInList() {
         ingredientList = ""
-        for ingredient in ingredients {
-            ingredientList += ingredient + "&"
+        for i in 0...ingredients.count - 1 {
+            if i > 0 {
+                ingredientList += "&"
+            }
+            ingredientList += ingredients[i]
         }
+        print(ingredientList)
     }
 }

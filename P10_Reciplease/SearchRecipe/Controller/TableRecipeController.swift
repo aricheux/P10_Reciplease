@@ -27,6 +27,7 @@ class TableRecipeController: UITableViewController {
     func searchRecipe() {
         RecipeManager.sharedInstance.searchRecipe() { (jsonResult, error) in
             if error == nil {
+                
                 self.recipeMatches = jsonResult["matches"]
                 self.tableView.reloadData()
             }
@@ -35,32 +36,21 @@ class TableRecipeController: UITableViewController {
 }
 
 extension TableRecipeController {
-    
-    /// Create the number of section in the table view
-    ///
-    /// - Parameters:
-    ///   - tableView: current table view
-    ///   - section: current section index
-    /// - Returns: Number of city weather retrieved from JSON
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recipeMatches?.count ?? 0
     }
     
-    /// Create the tableview cell with weather data from weather class
-    ///
-    /// - Parameters:
-    ///   - tableView: current table view
-    ///   - indexPath: current row index
-    /// - Returns: tableview cell created
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let recipeMatch = recipeMatches, let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? RecipeTableViewCell  else {
             return UITableViewCell()
         }
         
         let recipe = Recipe(with: recipeMatch[indexPath.row])
-        
         cell.textLabel?.text = recipe.title
         
+       // cell.weatherSkyCondition.text = weather.skyCondition
+
         return cell
     }
 }

@@ -11,6 +11,8 @@ import SwiftyJSON
 
 class SearchRecipeController: UIViewController {
     
+    @IBOutlet weak var ingredientText: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -19,9 +21,14 @@ class SearchRecipeController: UIViewController {
         RecipeManager.sharedInstance.addIngredient("cheese")
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func addIngredient(_ sender: Any) {
+        RecipeManager.sharedInstance.addIngredient(ingredientText.text)
+        self.ingredientText.text = ""
     }
+    
+    @IBAction func dismissKeyboard(_ sender: Any) {
+        self.ingredientText.resignFirstResponder()
+    }
+
 }
 
