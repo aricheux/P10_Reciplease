@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class TableRecipeController: UITableViewController {
+    
+    var jsonData: JSON?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +27,10 @@ class TableRecipeController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+}
+
+extension TableRecipeController {
 
     // MARK: - Table view data source
 

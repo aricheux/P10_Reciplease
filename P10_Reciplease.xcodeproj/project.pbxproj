@@ -20,6 +20,7 @@
 		716025F02085CC380076A79B /* FavoriteRecipe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 716025EF2085CC380076A79B /* FavoriteRecipe.storyboard */; };
 		716025F42085CCAD0076A79B /* TableRecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716025F32085CCAD0076A79B /* TableRecipeController.swift */; };
 		716025F62085CD380076A79B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 716025F52085CD380076A79B /* Default-568h@2x.png */; };
+		716025F82085CF790076A79B /* RecipeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716025F72085CF790076A79B /* RecipeManager.swift */; };
 		8E7FCBB9BCA36FC161163104 /* Pods_P10_RecipleaseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1006759F093427342353851 /* Pods_P10_RecipleaseUITests.framework */; };
 		B64C62B81A72D2FB887E00ED /* Pods_P10_Reciplease.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC54B4726147E17934AC96DC /* Pods_P10_Reciplease.framework */; };
 /* End PBXBuildFile section */
@@ -63,6 +64,7 @@
 		716025EF2085CC380076A79B /* FavoriteRecipe.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FavoriteRecipe.storyboard; sourceTree = "<group>"; };
 		716025F32085CCAD0076A79B /* TableRecipeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableRecipeController.swift; sourceTree = "<group>"; };
 		716025F52085CD380076A79B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		716025F72085CF790076A79B /* RecipeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeManager.swift; sourceTree = "<group>"; };
 		A21A32AED546B00560B49C91 /* Pods-P10_RecipleaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-P10_RecipleaseTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-P10_RecipleaseTests/Pods-P10_RecipleaseTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C7ED558A5263CAAFAA2D4C0D /* Pods-P10_RecipleaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-P10_RecipleaseTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-P10_RecipleaseTests/Pods-P10_RecipleaseTests.release.xcconfig"; sourceTree = "<group>"; };
 		CC54B4726147E17934AC96DC /* Pods_P10_Reciplease.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_P10_Reciplease.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -202,6 +204,7 @@
 		716025EC2085CBB70076A79B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				716025F72085CF790076A79B /* RecipeManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -534,6 +537,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				716025BD2085CB530076A79B /* FavoriteRecipeController.swift in Sources */,
+				716025F82085CF790076A79B /* RecipeManager.swift in Sources */,
 				716025B92085CB530076A79B /* AppDelegate.swift in Sources */,
 				716025F42085CCAD0076A79B /* TableRecipeController.swift in Sources */,
 				716025BB2085CB530076A79B /* SearchRecipeController.swift in Sources */,
@@ -713,7 +717,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q6R42C3K2F;
 				INFOPLIST_FILE = "$(SRCROOT)/P10_Reciplease/Ressource/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.aricheux.P10-Reciplease";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -729,7 +736,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q6R42C3K2F;
 				INFOPLIST_FILE = "$(SRCROOT)/P10_Reciplease/Ressource/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.aricheux.P10-Reciplease";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -746,7 +756,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q6R42C3K2F;
 				INFOPLIST_FILE = P10_RecipleaseTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.aricheux.P10-RecipleaseTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -764,7 +778,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q6R42C3K2F;
 				INFOPLIST_FILE = P10_RecipleaseTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.aricheux.P10-RecipleaseTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -781,7 +799,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q6R42C3K2F;
 				INFOPLIST_FILE = P10_RecipleaseUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.aricheux.P10-RecipleaseUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -798,7 +820,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q6R42C3K2F;
 				INFOPLIST_FILE = P10_RecipleaseUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.aricheux.P10-RecipleaseUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
