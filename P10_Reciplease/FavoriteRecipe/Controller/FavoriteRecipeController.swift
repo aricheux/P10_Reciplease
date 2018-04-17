@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  SecondViewController.swift
 //  P10_Reciplease
 //
 //  Created by RICHEUX Antoine on 17/04/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class FavoriteRecipeController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

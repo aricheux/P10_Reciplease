@@ -1,5 +1,5 @@
 //
-//  SecondViewController.swift
+//  FirstViewController.swift
 //  P10_Reciplease
 //
 //  Created by RICHEUX Antoine on 17/04/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class SearchRecipeController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
