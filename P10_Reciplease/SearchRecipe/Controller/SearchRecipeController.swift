@@ -31,6 +31,11 @@ class SearchRecipeController: UIViewController, UITableViewDelegate, UITableView
         recipeList.reloadData()
     }
     
+    @IBAction func clearList(_ sender: Any) {
+        RecipeManager.sharedInstance.clearIngredientList()
+        recipeList.reloadData()
+    }
+    
     @IBAction func dismissKeyboard(_ sender: Any) {
         self.ingredientText.resignFirstResponder()
     }
