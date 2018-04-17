@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class TableRecipeController: UITableViewController {
+class DetailRecipeController: UITableViewController {
     
     var recipeMatches: JSON?
     
@@ -35,7 +35,7 @@ class TableRecipeController: UITableViewController {
     }
 }
 
-extension TableRecipeController {
+extension DetailRecipeController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recipeMatches?.count ?? 0

@@ -9,9 +9,10 @@
 import UIKit
 import SwiftyJSON
 
-class SearchRecipeController: UIViewController {
+class SearchRecipeController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var ingredientText: UITextField!
+    @IBOutlet weak var recipeList: SearchListController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,16 +20,31 @@ class SearchRecipeController: UIViewController {
         
         RecipeManager.sharedInstance.addIngredient("eggs")
         RecipeManager.sharedInstance.addIngredient("cheese")
+        
+        recipeList.tableFooterView = UIView()
+        recipeList.reloadData()
     }
 
     @IBAction func addIngredient(_ sender: Any) {
         RecipeManager.sharedInstance.addIngredient(ingredientText.text)
         self.ingredientText.text = ""
+        recipeList.reloadData()
     }
     
     @IBAction func dismissKeyboard(_ sender: Any) {
         self.ingredientText.resignFirstResponder()
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return RecipeManager.sharedInstance.ingredients.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
+        cell.textLabel?.text = RecipeManager.sharedInstance.ingredients[indexPath.row]
+        
+        return cell
+    }
 
 }
-
