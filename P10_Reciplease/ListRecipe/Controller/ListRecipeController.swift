@@ -47,10 +47,17 @@ extension ListRecipeController {
         }
         
         let recipe = Recipe(with: recipeMatch[indexPath.row])
-        cell.textLabel?.text = recipe.title
+        cell.recipeTitle.text = recipe.title
+        cell.recipeIngredient.text = recipe.ingredients
+        cell.setRatingStar(rating: recipe.rating)
+        cell.recipeTime.text = recipe.executionTime
         
-       // cell.weatherSkyCondition.text = weather.skyCondition
-
+        RecipeManager.sharedInstance.getRecipeImage(from: recipe.imageUrl){ (image, error) in
+            if error == nil {
+                cell.recipeImage.image = image
+            }
+        }
+        
         return cell
     }
 }

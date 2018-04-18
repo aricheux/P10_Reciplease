@@ -12,6 +12,7 @@ import SwiftyJSON
 class Recipe {
     var title: String
     var image = UIImage()
+    var imageUrl: String
     var ingredients: String
     var rating: String
     var executionTime: String
@@ -21,13 +22,15 @@ class Recipe {
     /// - Parameter json: Json data from yahoo
     init (with json: JSON) {
         self.title = json["recipeName"].stringValue
-        
+        self.imageUrl = json["smallImageUrls"][0].stringValue
+        self.imageUrl = self.imageUrl.replacingOccurrences(of: "\\", with: "")
         self.ingredients = ""
         for ingredientList in json["ingredients"].arrayValue {
             self.ingredients += ingredientList.stringValue + " ,"
         }
         
         self.rating = json["rating"].stringValue
-        self.executionTime = json["recipeName"].stringValue
+        print(self.rating)
+        self.executionTime = json["totalTimeInSeconds"].stringValue
     }
 }

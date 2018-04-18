@@ -8,7 +8,13 @@
 import UIKit
 
 class ListRecipeCell: UITableViewCell {
-
+    
+    @IBOutlet weak var recipeTitle: UILabel!
+    @IBOutlet weak var recipeIngredient: UILabel!
+    @IBOutlet weak var recipeImage: UIImageView!
+    @IBOutlet var ratingStar: [UIImageView]!
+    
+    @IBOutlet weak var recipeTime: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -18,6 +24,19 @@ class ListRecipeCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func setRatingStar(rating: String) {
+        if let ratingNumber = Double(rating) {
+            for i in 0...ratingStar.count-1 {
+                ratingStar[i].image = #imageLiteral(resourceName: "starEmpty")
+                if ratingNumber >= Double(i + 1) {
+                    ratingStar[i].image = #imageLiteral(resourceName: "starFull")
+                } else if (Double(i + 1) - ratingNumber) < 0.5 {
+                    ratingStar[i].image = #imageLiteral(resourceName: "starHalf")
+                }
+            }
+        }
     }
 
 }

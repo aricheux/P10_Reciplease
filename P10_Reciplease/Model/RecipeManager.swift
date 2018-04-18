@@ -37,6 +37,20 @@ class RecipeManager {
         }
     }
     
+    func getRecipeImage(from url: String, completion: @escaping (UIImage, Error?) -> ()) {
+        Alamofire.request(url).responseImage { response in
+            switch response.result {
+            case .success:
+                if let image = response.result.value {
+                    completion(image, nil)
+                }
+            case .failure(let error):
+                completion(UIImage(), error)
+                print(error)
+            }
+        }
+    }
+    
     func addIngredient(_ ingredient: String?){
         if let strIngredient = ingredient {
             ingredients.append(strIngredient)
