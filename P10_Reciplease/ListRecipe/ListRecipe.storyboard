@@ -111,6 +111,7 @@
                                     <outletCollection property="ratingStar" destination="FYL-Lb-eqc" collectionClass="NSMutableArray" id="W2r-tu-1cg"/>
                                     <outletCollection property="ratingStar" destination="p4t-OL-k7i" collectionClass="NSMutableArray" id="CTO-Lu-hcn"/>
                                     <outletCollection property="ratingStar" destination="tx2-Qd-RP8" collectionClass="NSMutableArray" id="qOd-ZB-yfI"/>
+                                    <segue destination="rP1-LM-jCW" kind="show" identifier="RecipeDetail" id="ugu-75-XXW"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -120,9 +121,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Zxb-U4-fjB"/>
-                    <connections>
-                        <segue destination="rP1-LM-jCW" kind="show" identifier="detailRecipe" id="yWr-7X-f1F"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TCa-mS-EYh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -131,7 +129,7 @@
         <!--Detail Recipe Controller-->
         <scene sceneID="86k-Vm-hzT">
             <objects>
-                <viewController id="rP1-LM-jCW" customClass="DetailRecipeController" customModule="P10_Reciplease" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="detailRecipe" id="rP1-LM-jCW" customClass="DetailRecipeController" customModule="P10_Reciplease" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tkp-So-xFJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -142,12 +140,26 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VVD-ey-KQX">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VVD-ey-KQX">
                                 <rect key="frame" x="0.0" y="59" width="375" height="133.5"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5t7-dq-1Yh">
                                 <rect key="frame" x="-0.5" y="200" width="375" height="200"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="KTm-PX-Teh">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KTm-PX-Teh" id="VZe-Z0-Y2f">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="rP1-LM-jCW" id="o6H-5E-6vI"/>
+                                    <outlet property="delegate" destination="rP1-LM-jCW" id="jNO-O3-aIJ"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -167,9 +179,9 @@
                         <viewLayoutGuide key="safeArea" id="FtJ-X1-P0N"/>
                     </view>
                     <connections>
-                        <outlet property="IngredientTable" destination="5t7-dq-1Yh" id="aXs-cu-WfF"/>
-                        <outlet property="recipeImage" destination="VVD-ey-KQX" id="I90-c7-NyC"/>
-                        <outlet property="recipeTitle" destination="QL0-bG-IH1" id="mrk-CN-Coq"/>
+                        <outlet property="ingredientList" destination="5t7-dq-1Yh" id="dGD-cZ-2Xh"/>
+                        <outlet property="recipeImage" destination="VVD-ey-KQX" id="dT3-JQ-3GF"/>
+                        <outlet property="recipeTitle" destination="QL0-bG-IH1" id="UZV-aD-PBf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g0X-xT-g8Q" userLabel="First Responder" sceneMemberID="firstResponder"/>

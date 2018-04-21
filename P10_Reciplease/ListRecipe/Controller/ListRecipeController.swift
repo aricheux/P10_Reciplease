@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class ListRecipeController: UITableViewController {
     
-    var recipeMatches: JSON?
+    var recipeObject: [Recipe] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +19,7 @@ class ListRecipeController: UITableViewController {
         self.tableView.tableFooterView = UIView()
         searchRecipe()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         searchRecipe()
     }
@@ -27,8 +27,10 @@ class ListRecipeController: UITableViewController {
     func searchRecipe() {
         RecipeManager.sharedInstance.searchRecipe() { (jsonResult, error) in
             if error == nil {
-                
-                self.recipeMatches = jsonResult["matches"]
+                let recipeMatches = jsonResult["matches"]
+                for recipeMatch in recipeMatches {
+                    self.recipeObject.append(Recipe(with: recipeMatch.1))
+                }
                 self.tableView.reloadData()
             }
         }
@@ -36,17 +38,17 @@ class ListRecipeController: UITableViewController {
 }
 
 extension ListRecipeController {
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipeMatches?.count ?? 0
+        return recipeObject.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let recipeMatch = recipeMatches, let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ListRecipeCell  else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ListRecipeCell  else {
             return UITableViewCell()
         }
         
-        let recipe = Recipe(with: recipeMatch[indexPath.row])
+        let recipe = self.recipeObject[indexPath.row]
         cell.recipeTitle.text = recipe.title
         cell.recipeIngredient.text = recipe.ingredientList
         cell.setRatingStar(rating: recipe.rating)
@@ -55,18 +57,18 @@ extension ListRecipeController {
         RecipeManager.sharedInstance.getRecipeImage(from: recipe.imageUrl){ (image, error) in
             if error == nil {
                 cell.recipeImage.image = image
+                self.recipeObject[indexPath.row].image = image
             }
         }
         
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let jsonRecipe = recipeMatches {
-            let detailRecipe = Recipe(with: jsonRecipe[indexPath.row])
-            let detailView = DetailRecipeController()
-            detailView.detailRecipe = detailRecipe
-            navigationController?.pushViewController(detailView, animated: true)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "RecipeDetail" {
+            if let destination = segue.destination as? DetailRecipeController, let recipeIndex = tableView.indexPathForSelectedRow?.row {
+                destination.detailRecipe = self.recipeObject[recipeIndex]
+            }
         }
     }
 }

@@ -21,6 +21,15 @@ class Recipe {
     /// Initialize the weather object with Json value from Yahoo
     ///
     /// - Parameter json: Json data from yahoo
+    init() {
+        self.title = ""
+        self.imageUrl = ""
+        self.ingredients = JSON()
+        self.ingredientList = ""
+        self.rating = 0.0
+        self.executionTime = ""
+    }
+    
     init (with json: JSON) {
         self.title = json["sourceDisplayName"].stringValue
         self.imageUrl = json["imageUrlsBySize"]["90"].stringValue

@@ -40,6 +40,10 @@ class SearchRecipeController: UIViewController, UITableViewDelegate, UITableView
         self.ingredientText.resignFirstResponder()
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Ingredients"
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return RecipeManager.sharedInstance.ingredients.count
     }
