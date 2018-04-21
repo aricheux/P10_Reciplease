@@ -13,24 +13,37 @@ class Recipe {
     var title: String
     var image = UIImage()
     var imageUrl: String
-    var ingredients: String
-    var rating: String
-    var executionTime: String
+    var ingredients: JSON
+    var ingredientList: String
+    var rating: Double
+    var executionTime: String?
     
     /// Initialize the weather object with Json value from Yahoo
     ///
     /// - Parameter json: Json data from yahoo
     init (with json: JSON) {
-        self.title = json["recipeName"].stringValue
-        self.imageUrl = json["smallImageUrls"][0].stringValue
+        self.title = json["sourceDisplayName"].stringValue
+        self.imageUrl = json["imageUrlsBySize"]["90"].stringValue
         self.imageUrl = self.imageUrl.replacingOccurrences(of: "\\", with: "")
-        self.ingredients = ""
-        for ingredientList in json["ingredients"].arrayValue {
-            self.ingredients += ingredientList.stringValue + " ,"
+        self.ingredients = json["ingredients"]
+        self.ingredientList = ""
+        for i in 0...self.ingredients.count-1 {
+            self.ingredientList += self.ingredients[i].stringValue
+            if i < self.ingredients.count-1 {
+                self.ingredientList += ", "
+            }
         }
         
-        self.rating = json["rating"].stringValue
-        print(self.rating)
-        self.executionTime = json["totalTimeInSeconds"].stringValue
+        self.rating = json["rating"].doubleValue
+        self.executionTime = self.convertSecondInMinute(json["totalTimeInSeconds"].stringValue)
+    }
+    
+    func convertSecondInMinute(_ stringSecond : String) -> String {
+        if let seconds = Int(stringSecond) {
+            let minutes = (seconds % 3600) / 60
+            
+            return "\(minutes)m"
+        }
+        return "null"
     }
 }

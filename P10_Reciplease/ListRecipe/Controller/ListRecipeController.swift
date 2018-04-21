@@ -48,7 +48,7 @@ extension ListRecipeController {
         
         let recipe = Recipe(with: recipeMatch[indexPath.row])
         cell.recipeTitle.text = recipe.title
-        cell.recipeIngredient.text = recipe.ingredients
+        cell.recipeIngredient.text = recipe.ingredientList
         cell.setRatingStar(rating: recipe.rating)
         cell.recipeTime.text = recipe.executionTime
         
@@ -59,5 +59,14 @@ extension ListRecipeController {
         }
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let jsonRecipe = recipeMatches {
+            let detailRecipe = Recipe(with: jsonRecipe[indexPath.row])
+            let detailView = DetailRecipeController()
+            detailView.detailRecipe = detailRecipe
+            navigationController?.pushViewController(detailView, animated: true)
+        }
     }
 }

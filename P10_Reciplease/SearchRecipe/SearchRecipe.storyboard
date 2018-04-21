@@ -59,7 +59,7 @@
                                     <action selector="clearList:" destination="9pv-A4-QxB" eventType="touchUpInside" id="aCV-2H-E9V"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dgg-kN-nvJ" customClass="SearchListController" customModule="P10_Reciplease" customModuleProvider="target">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dgg-kN-nvJ">
                                 <rect key="frame" x="-0.5" y="171" width="375" height="351"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -133,7 +133,7 @@
                     <navigationItem key="navigationItem" title="Search recipe" id="u6z-Za-p7f"/>
                     <connections>
                         <outlet property="ingredientText" destination="8NI-pk-kVx" id="oKx-uz-iOm"/>
-                        <outlet property="recipeList" destination="dgg-kN-nvJ" id="BQs-ak-Aeh"/>
+                        <outlet property="searchList" destination="dgg-kN-nvJ" id="5Wy-TY-Q5V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>

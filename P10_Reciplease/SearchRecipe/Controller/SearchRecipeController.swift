@@ -12,7 +12,7 @@ import SwiftyJSON
 class SearchRecipeController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var ingredientText: UITextField!
-    @IBOutlet weak var recipeList: SearchListController!
+    @IBOutlet weak var searchList: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,19 +21,19 @@ class SearchRecipeController: UIViewController, UITableViewDelegate, UITableView
         RecipeManager.sharedInstance.addIngredient("eggs")
         RecipeManager.sharedInstance.addIngredient("cheese")
         
-        recipeList.tableFooterView = UIView()
-        recipeList.reloadData()
+        searchList.tableFooterView = UIView()
+        searchList.reloadData()
     }
 
     @IBAction func addIngredientToList(_ sender: Any) {
         RecipeManager.sharedInstance.addIngredient(ingredientText.text)
         self.ingredientText.text = ""
-        recipeList.reloadData()
+        searchList.reloadData()
     }
     
     @IBAction func clearList(_ sender: Any) {
         RecipeManager.sharedInstance.clearIngredientList()
-        recipeList.reloadData()
+        searchList.reloadData()
     }
     
     @IBAction func dismissKeyboard(_ sender: Any) {

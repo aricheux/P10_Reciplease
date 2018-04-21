@@ -19,24 +19,22 @@ class ListRecipeCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
-    func setRatingStar(rating: String) {
-        if let ratingNumber = Double(rating) {
-            for i in 0...ratingStar.count-1 {
-                ratingStar[i].image = #imageLiteral(resourceName: "starEmpty")
-                if ratingNumber >= Double(i + 1) {
-                    ratingStar[i].image = #imageLiteral(resourceName: "starFull")
-                } else if (Double(i + 1) - ratingNumber) < 0.5 {
-                    ratingStar[i].image = #imageLiteral(resourceName: "starHalf")
-                }
+    func setRatingStar(rating: Double) {
+        for i in 0...ratingStar.count-1 {
+            ratingStar[i].image = #imageLiteral(resourceName: "starEmpty")
+            if rating >= Double(i + 1) {
+                ratingStar[i].image = #imageLiteral(resourceName: "starFull")
+            } else if (Double(i + 1) - rating) < 0.5 {
+                ratingStar[i].image = #imageLiteral(resourceName: "starHalf")
             }
         }
     }
-
+    
 }

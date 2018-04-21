@@ -71,6 +71,5 @@ class RecipeManager {
             }
             ingredientList += ingredients[i]
         }
-        print(ingredientList)
     }
 }

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		35858C7B2779CF1353267C30 /* Pods_P10_RecipleaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D7407C711D41717705A27A /* Pods_P10_RecipleaseTests.framework */; };
 		7100CAFE20863E0900F58147 /* ListRecipe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7100CAFD20863E0900F58147 /* ListRecipe.storyboard */; };
-		7100CB0020863E6300F58147 /* SearchListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7100CAFF20863E6300F58147 /* SearchListController.swift */; };
+		712D56AA208A574E00505903 /* DetailRecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712D56A9208A574E00505903 /* DetailRecipeController.swift */; };
 		716025B92085CB530076A79B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716025B82085CB530076A79B /* AppDelegate.swift */; };
 		716025BB2085CB530076A79B /* SearchRecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716025BA2085CB530076A79B /* SearchRecipeController.swift */; };
 		716025BD2085CB530076A79B /* FavoriteRecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716025BC2085CB530076A79B /* FavoriteRecipeController.swift */; };
@@ -51,7 +51,7 @@
 		28D7407C711D41717705A27A /* Pods_P10_RecipleaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_P10_RecipleaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6365D3E22B4C412DFAD2A8DA /* Pods-P10_Reciplease.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-P10_Reciplease.release.xcconfig"; path = "Pods/Target Support Files/Pods-P10_Reciplease/Pods-P10_Reciplease.release.xcconfig"; sourceTree = "<group>"; };
 		7100CAFD20863E0900F58147 /* ListRecipe.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ListRecipe.storyboard; path = P10_Reciplease/ListRecipe/ListRecipe.storyboard; sourceTree = SOURCE_ROOT; };
-		7100CAFF20863E6300F58147 /* SearchListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListController.swift; sourceTree = "<group>"; };
+		712D56A9208A574E00505903 /* DetailRecipeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecipeController.swift; sourceTree = "<group>"; };
 		716025B52085CB530076A79B /* P10_Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = P10_Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		716025B82085CB530076A79B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		716025BA2085CB530076A79B /* SearchRecipeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipeController.swift; sourceTree = "<group>"; };
@@ -123,7 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				716025BA2085CB530076A79B /* SearchRecipeController.swift */,
-				7100CAFF20863E6300F58147 /* SearchListController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -142,6 +141,7 @@
 			children = (
 				716025F32085CCAD0076A79B /* ListRecipeController.swift */,
 				716025FD208616E10076A79B /* ListRecipeCell.swift */,
+				712D56A9208A574E00505903 /* DetailRecipeController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -568,10 +568,10 @@
 				716025BD2085CB530076A79B /* FavoriteRecipeController.swift in Sources */,
 				716025F82085CF790076A79B /* RecipeManager.swift in Sources */,
 				716025B92085CB530076A79B /* AppDelegate.swift in Sources */,
-				7100CB0020863E6300F58147 /* SearchListController.swift in Sources */,
 				716025FE208616E20076A79B /* ListRecipeCell.swift in Sources */,
 				716025FA208613CA0076A79B /* Recipe.swift in Sources */,
 				716025F42085CCAD0076A79B /* ListRecipeController.swift in Sources */,
+				712D56AA208A574E00505903 /* DetailRecipeController.swift in Sources */,
 				716025BB2085CB530076A79B /* SearchRecipeController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
