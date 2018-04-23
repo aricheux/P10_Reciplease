@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class ResultRecipeController: UITableViewController {
     
-    var recipeObject: [Recipe] = []
+    var recipeMatches: JSON?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +27,7 @@ class ResultRecipeController: UITableViewController {
     func searchRecipe() {
         RecipeManager.sharedInstance.searchRecipe() { (jsonResult, error) in
             if error == nil {
-                let recipeMatches = jsonResult["matches"]
-                self.recipeObject = []
-                for recipeMatch in recipeMatches {
-                    self.recipeObject.append(Recipe(with: recipeMatch.1))
-                }
+                self.recipeMatches = jsonResult["matches"]
                 self.tableView.reloadData()
             }
         }
@@ -41,15 +37,15 @@ class ResultRecipeController: UITableViewController {
 extension ResultRecipeController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipeObject.count
+        return recipeMatches?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ResultRecipeCell  else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ResultRecipeCell, let recipeMatch = recipeMatches  else {
             return UITableViewCell()
         }
         
-        let recipe = self.recipeObject[indexPath.row]
+        let recipe = SearchRecipe(with: recipeMatch[indexPath.row])
         cell.recipeTitle.text = recipe.title
         cell.recipeIngredient.text = recipe.ingredientList
         cell.setRatingStar(rating: recipe.rating)
@@ -58,7 +54,6 @@ extension ResultRecipeController {
         RecipeManager.sharedInstance.getRecipeImage(from: recipe.imageUrl){ (image, error) in
             if error == nil {
                 cell.recipeImage.image = image
-                self.recipeObject[indexPath.row].image = image
             }
         }
         
@@ -67,8 +62,8 @@ extension ResultRecipeController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "RecipeDetail" {
-            if let destination = segue.destination as? DetailRecipeController, let recipeIndex = tableView.indexPathForSelectedRow?.row {
-                destination.detailRecipe = self.recipeObject[recipeIndex]
+            if let destination = segue.destination as? DetailRecipeController, let recipeIndex = tableView.indexPathForSelectedRow?.row, let recipeMatch = self.recipeMatches {
+                destination.recipeId = recipeMatch[recipeIndex]["id"].stringValue
             }
         }
     }

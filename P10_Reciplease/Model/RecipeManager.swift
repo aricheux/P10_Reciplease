@@ -37,6 +37,21 @@ class RecipeManager {
         }
     }
     
+    func getRecipeDetail(with recipeId: String, completion: @escaping (JSON, Error?) -> ()) {
+        let yummyUrl = "http://api.yummly.com/v1/api/recipe/" + recipeId
+        let parameters = ["_app_id": yummlyAppId, "_app_key": yummlyAppKey]
+        Alamofire.request(yummyUrl, method: .get, parameters: parameters, encoding: URLEncoding.default).responseJSON { response in
+            switch response.result {
+            case .success:
+                if let reponse = response.result.value {
+                    completion(JSON(reponse), nil)
+                }
+            case .failure(let error):
+                completion(JSON.null, error)
+            }
+        }
+    }
+    
     func getRecipeImage(from url: String, completion: @escaping (UIImage, Error?) -> ()) {
         Alamofire.request(url).responseImage { response in
             switch response.result {
@@ -46,7 +61,6 @@ class RecipeManager {
                 }
             case .failure(let error):
                 completion(UIImage(), error)
-                print(error)
             }
         }
     }

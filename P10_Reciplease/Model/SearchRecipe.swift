@@ -9,9 +9,9 @@ import Foundation
 import SwiftyJSON
 
 ///
-class Recipe {
+class SearchRecipe {
     var title: String
-    var image = UIImage()
+    var id: String
     var imageUrl: String
     var ingredients: JSON
     var ingredientList: String
@@ -19,22 +19,9 @@ class Recipe {
     var executionTime: String?
     var category: String
     
-    /// Initialize the weather object with Json value from Yahoo
-    ///
-    /// - Parameter json: Json data from yahoo
-    init() {
-        self.title = ""
-        self.imageUrl = ""
-        self.ingredients = JSON()
-        self.ingredientList = ""
-        self.rating = 0.0
-        self.executionTime = ""
-        self.category = ""
-    }
-    
     init (with json: JSON) {
-        //print(json)
-        self.title = json["sourceDisplayName"].stringValue
+        self.title = json["recipeName"].stringValue
+        self.id = json["id"].stringValue
         self.imageUrl = json["imageUrlsBySize"]["90"].stringValue
         self.imageUrl = self.imageUrl.replacingOccurrences(of: "\\", with: "")
         self.ingredients = json["ingredients"]
@@ -47,14 +34,7 @@ class Recipe {
         }
         
         self.rating = json["rating"].doubleValue
-        //let arrayCourse = json["attributes"]["course"][0]
         self.category = json["attributes"]["course"][0].stringValue
-//        for i in 0...arrayCourse.count-1 {
-//            self.category += arrayCourse[i].stringValue
-//            if i < arrayCourse.count-1 {
-//                self.category += ", "
-//            }
-//        }
         self.executionTime = self.convertSecondInMinute(json["totalTimeInSeconds"].stringValue)
     }
     

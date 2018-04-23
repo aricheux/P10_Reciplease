@@ -11,7 +11,8 @@ import SwiftyJSON
 
 class DetailRecipeController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var detailRecipe: Recipe?
+    var detailRecipe: DetailedRecipe?
+    var recipeId = String()
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var recipeCategory: UILabel!
     @IBOutlet weak var recipeTime: UILabel!
@@ -28,12 +29,29 @@ class DetailRecipeController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func setupRecipeDetail() {
-        if let recipe = detailRecipe {
-            self.recipeImage.image = recipe.image
-            self.recipeTitle.text = recipe.title
-            self.recipeTime.text = recipe.executionTime
-            self.recipeCategory.text = recipe.category
-            
+        RecipeManager.sharedInstance.getRecipeDetail(with: recipeId) { (jsonResult, error) in
+            if error == nil {
+                self.detailRecipe = DetailedRecipe(with: jsonResult)
+                if let imageUrl = self.detailRecipe?.imageUrl {
+                    RecipeManager.sharedInstance.getRecipeImage(from: imageUrl){ (image, error) in
+                        if error == nil {
+                            self.recipeImage.image = image
+                        }
+                    }
+                }
+                self.recipeTime.text = self.detailRecipe?.totalTime
+                self.recipeTitle.text = self.detailRecipe?.name
+                self.ingredientList.reloadData()
+            }
+        }
+    }
+    
+    
+    @IBAction func showDetailedInstruction(_ sender: Any) {
+        if let detailedUrl = detailRecipe?.sourceRecipeUrl {
+            if let url = URL(string: detailedUrl) {
+                UIApplication.shared.open(url, options: [:])
+            }
         }
     }
     
@@ -42,13 +60,13 @@ class DetailRecipeController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return detailRecipe?.ingredients.count ?? 0
+        return detailRecipe?.ingredientLines.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-        cell.textLabel?.text = detailRecipe?.ingredients[indexPath.row].stringValue
+        cell.textLabel?.text = detailRecipe?.ingredientLines[indexPath.row].stringValue
 
         return cell
     }
