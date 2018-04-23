@@ -51,11 +51,9 @@ class RecipeManager {
         }
     }
     
-    func addIngredient(_ ingredient: String?){
-        if let strIngredient = ingredient {
-            ingredients.append(strIngredient)
-            formatIngredientInList()
-        }
+    func addIngredient(_ ingredient: String) {
+        ingredients.append(ingredient)
+        formatIngredientInList()
     }
     
     func clearIngredientList() {

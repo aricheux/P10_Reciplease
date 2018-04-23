@@ -13,6 +13,8 @@ class SearchRecipeController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var ingredientText: UITextField!
     @IBOutlet weak var searchList: UITableView!
+    /// String who contain the text to put when the textview is empty
+    let placeholder = "eggs, cheese, ham, ..."
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,11 +26,22 @@ class SearchRecipeController: UIViewController, UITableViewDelegate, UITableView
         searchList.tableFooterView = UIView()
         searchList.reloadData()
     }
-
+    
     @IBAction func addIngredientToList(_ sender: Any) {
-        RecipeManager.sharedInstance.addIngredient(ingredientText.text)
-        self.ingredientText.text = ""
-        searchList.reloadData()
+        if let ingredient = ingredientText.text, !ingredient.isEmpty, ingredient != placeholder {
+            RecipeManager.sharedInstance.addIngredient(ingredient)
+            self.ingredientText.text = ""
+            searchList.reloadData()
+        } else {
+            self.errorPopUp()
+        }
+    }
+    /// Show an error pop-up if the API request have a problem
+    func errorPopUp() {
+        let alertVC = UIAlertController(title: "", message: "Veuillez renseigner un ingrédient", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        
+        self.present(alertVC, animated: true, completion: nil)
     }
     
     @IBAction func clearList(_ sender: Any) {
@@ -55,5 +68,30 @@ class SearchRecipeController: UIViewController, UITableViewDelegate, UITableView
         
         return cell
     }
+    
+}
 
+/// Extension of UITextViewDelegate to handle the place holder
+extension SearchRecipeController: UITextViewDelegate {
+    /// replace the placeholder by an empty string
+    func textViewDidBeginEditing(_ textView: UITextView)
+    {
+        if (textView.text == placeholder)
+        {
+            textView.text = ""
+            textView.textColor = .black
+        }
+        textView.becomeFirstResponder()
+    }
+    
+    /// Replace the empty text by a placeholder
+    func textViewDidEndEditing(_ textView: UITextView)
+    {
+        if (textView.text == "")
+        {
+            textView.text = placeholder
+            textView.textColor = .lightGray
+        }
+        textView.resignFirstResponder()
+    }
 }

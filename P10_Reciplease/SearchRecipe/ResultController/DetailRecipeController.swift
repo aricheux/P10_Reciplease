@@ -12,8 +12,10 @@ import SwiftyJSON
 class DetailRecipeController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var detailRecipe: Recipe?
-    @IBOutlet weak var recipeTitle: UILabel!
     @IBOutlet weak var recipeImage: UIImageView!
+    @IBOutlet weak var recipeCategory: UILabel!
+    @IBOutlet weak var recipeTime: UILabel!
+    @IBOutlet weak var recipeTitle: UILabel!
     @IBOutlet weak var ingredientList: UITableView!
     
     override func viewDidLoad() {
@@ -27,8 +29,11 @@ class DetailRecipeController: UIViewController, UITableViewDelegate, UITableView
     
     func setupRecipeDetail() {
         if let recipe = detailRecipe {
-            self.recipeTitle.text = recipe.title
             self.recipeImage.image = recipe.image
+            self.recipeTitle.text = recipe.title
+            self.recipeTime.text = recipe.executionTime
+            self.recipeCategory.text = recipe.category
+            
         }
     }
     
@@ -42,9 +47,9 @@ class DetailRecipeController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
+
         cell.textLabel?.text = detailRecipe?.ingredients[indexPath.row].stringValue
-        
+
         return cell
     }
     

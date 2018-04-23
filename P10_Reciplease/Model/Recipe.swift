@@ -17,6 +17,7 @@ class Recipe {
     var ingredientList: String
     var rating: Double
     var executionTime: String?
+    var category: String
     
     /// Initialize the weather object with Json value from Yahoo
     ///
@@ -28,9 +29,11 @@ class Recipe {
         self.ingredientList = ""
         self.rating = 0.0
         self.executionTime = ""
+        self.category = ""
     }
     
     init (with json: JSON) {
+        //print(json)
         self.title = json["sourceDisplayName"].stringValue
         self.imageUrl = json["imageUrlsBySize"]["90"].stringValue
         self.imageUrl = self.imageUrl.replacingOccurrences(of: "\\", with: "")
@@ -44,6 +47,14 @@ class Recipe {
         }
         
         self.rating = json["rating"].doubleValue
+        //let arrayCourse = json["attributes"]["course"][0]
+        self.category = json["attributes"]["course"][0].stringValue
+//        for i in 0...arrayCourse.count-1 {
+//            self.category += arrayCourse[i].stringValue
+//            if i < arrayCourse.count-1 {
+//                self.category += ", "
+//            }
+//        }
         self.executionTime = self.convertSecondInMinute(json["totalTimeInSeconds"].stringValue)
     }
     

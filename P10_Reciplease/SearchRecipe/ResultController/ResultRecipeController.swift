@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class ListRecipeController: UITableViewController {
+class ResultRecipeController: UITableViewController {
     
     var recipeObject: [Recipe] = []
     
@@ -28,6 +28,7 @@ class ListRecipeController: UITableViewController {
         RecipeManager.sharedInstance.searchRecipe() { (jsonResult, error) in
             if error == nil {
                 let recipeMatches = jsonResult["matches"]
+                self.recipeObject = []
                 for recipeMatch in recipeMatches {
                     self.recipeObject.append(Recipe(with: recipeMatch.1))
                 }
@@ -37,14 +38,14 @@ class ListRecipeController: UITableViewController {
     }
 }
 
-extension ListRecipeController {
+extension ResultRecipeController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recipeObject.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ListRecipeCell  else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? ResultRecipeCell  else {
             return UITableViewCell()
         }
         
