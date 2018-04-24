@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="KGk-i7-Jjw" customClass="RecipeInfoCell" customModule="P10_Reciplease" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recip Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MXh-mV-AaB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BKo-Qf-QR9" customClass="CosmosView" customModule="Cosmos">
+                        <rect key="frame" x="10" y="30" width="128" height="29.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30 min" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l2y-7x-Umt">
+                        <rect key="frame" x="182" y="30" width="128" height="29.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="MXh-mV-AaB" secondAttribute="trailing" id="CwU-57-hVv"/>
+                    <constraint firstItem="MXh-mV-AaB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="F7A-E3-ZGl"/>
+                    <constraint firstAttribute="bottom" secondItem="BKo-Qf-QR9" secondAttribute="bottom" id="MF9-mG-Hma"/>
+                    <constraint firstItem="BKo-Qf-QR9" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.4" id="b04-ot-lNO"/>
+                    <constraint firstItem="MXh-mV-AaB" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.5" id="c7D-yg-G2o"/>
+                    <constraint firstAttribute="trailing" secondItem="l2y-7x-Umt" secondAttribute="trailing" constant="10" id="gH2-Yq-OT1"/>
+                    <constraint firstItem="l2y-7x-Umt" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.4" id="hz7-Fo-3ki"/>
+                    <constraint firstAttribute="bottom" secondItem="l2y-7x-Umt" secondAttribute="bottom" id="iMS-sF-MGA"/>
+                    <constraint firstItem="BKo-Qf-QR9" firstAttribute="top" secondItem="MXh-mV-AaB" secondAttribute="bottom" id="lUX-oT-WBd"/>
+                    <constraint firstItem="MXh-mV-AaB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="pnK-6D-q8P"/>
+                    <constraint firstItem="BKo-Qf-QR9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="s4l-iQ-YWj"/>
+                    <constraint firstItem="l2y-7x-Umt" firstAttribute="top" secondItem="MXh-mV-AaB" secondAttribute="bottom" id="sO2-oL-jkt"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="recipeName" destination="MXh-mV-AaB" id="Lwt-9u-HaW"/>
+                <outlet property="recipeRating" destination="BKo-Qf-QR9" id="eAQ-Dr-wSu"/>
+                <outlet property="recipeTime" destination="l2y-7x-Umt" id="JFE-1e-dcn"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="62"/>
+        </tableViewCell>
+    </objects>
+</document>

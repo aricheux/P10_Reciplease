@@ -11,14 +11,12 @@ import SwiftyJSON
 
 class SearchRecipeController: UIViewController {
     
+    let placeholder = "eggs, cheese, ham, ..."
     @IBOutlet weak var ingredientText: UITextField!
     @IBOutlet weak var searchList: UITableView!
-    /// String who contain the text to put when the textview is empty
-    let placeholder = "eggs, cheese, ham, ..."
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
         setupContent()
     }
@@ -29,6 +27,13 @@ class SearchRecipeController: UIViewController {
         
         searchList.tableFooterView = UIView()
         searchList.reloadData()
+    }
+    
+    func errorPopUp() {
+        let alertVC = UIAlertController(title: "", message: "Veuillez renseigner un ingrédient", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        
+        self.present(alertVC, animated: true, completion: nil)
     }
     
     @IBAction func addIngredientToList(_ sender: Any) {
@@ -49,15 +54,6 @@ class SearchRecipeController: UIViewController {
     @IBAction func dismissKeyboard(_ sender: Any) {
         self.ingredientText.resignFirstResponder()
     }
-    
-    /// Show an error pop-up if the API request have a problem
-    func errorPopUp() {
-        let alertVC = UIAlertController(title: "", message: "Veuillez renseigner un ingrédient", preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-        
-        self.present(alertVC, animated: true, completion: nil)
-    }
-    
 }
 
 extension SearchRecipeController: UITableViewDelegate, UITableViewDataSource {

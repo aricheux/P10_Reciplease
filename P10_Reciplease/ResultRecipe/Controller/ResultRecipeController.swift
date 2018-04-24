@@ -16,11 +16,15 @@ class ResultRecipeController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.tableFooterView = UIView()
-        searchRecipe()
+        setupContent()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        searchRecipe()
+    }
+    
+    func setupContent() {
+        self.tableView.tableFooterView = UIView()
         searchRecipe()
     }
     
@@ -35,7 +39,6 @@ class ResultRecipeController: UITableViewController {
 }
 
 extension ResultRecipeController {
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recipeMatches?.count ?? 0
     }

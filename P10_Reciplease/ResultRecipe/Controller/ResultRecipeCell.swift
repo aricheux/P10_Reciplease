@@ -14,8 +14,8 @@ class ResultRecipeCell: UITableViewCell {
     @IBOutlet weak var recipeIngredient: UILabel!
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var rateStars: CosmosView!
-    
     @IBOutlet weak var recipeTime: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
