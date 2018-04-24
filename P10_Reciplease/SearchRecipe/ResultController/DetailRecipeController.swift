@@ -9,12 +9,11 @@
 import UIKit
 import SwiftyJSON
 
-class DetailRecipeController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class DetailRecipeController: UIViewController {
     
     var detailRecipe: DetailedRecipe?
     var recipeId = String()
     @IBOutlet weak var recipeImage: UIImageView!
-    @IBOutlet weak var recipeCategory: UILabel!
     @IBOutlet weak var recipeTime: UILabel!
     @IBOutlet weak var recipeTitle: UILabel!
     @IBOutlet weak var ingredientList: UITableView!
@@ -22,6 +21,9 @@ class DetailRecipeController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         setupRecipeDetail()
+        let favoriteItem = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(favoriteTapped))
+        favoriteItem.image = #imageLiteral(resourceName: "starEmpty")
+        navigationItem.rightBarButtonItem = favoriteItem
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,6 +57,11 @@ class DetailRecipeController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
+    @objc func favoriteTapped() {
+        
+    }
+}
+extension DetailRecipeController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Ingredients"
     }
@@ -65,9 +72,9 @@ class DetailRecipeController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-
+        
         cell.textLabel?.text = detailRecipe?.ingredientLines[indexPath.row].stringValue
-
+        
         return cell
     }
     

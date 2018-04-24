@@ -164,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				716025B82085CB530076A79B /* AppDelegate.swift */,
+				716F7F43208E4F0C00FED47A /* Manager */,
 				716025EC2085CBB70076A79B /* Model */,
 				716025E92085CB820076A79B /* TabBarRecipe */,
 				716025EA2085CB8D0076A79B /* SearchRecipe */,
@@ -231,7 +232,6 @@
 		716025EC2085CBB70076A79B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				716025F72085CF790076A79B /* RecipeManager.swift */,
 				716025F9208613CA0076A79B /* SearchRecipe.swift */,
 				716F7F41208E3B4C00FED47A /* DetailedRecipe.swift */,
 			);
@@ -244,6 +244,14 @@
 				716025BC2085CB530076A79B /* FavoriteRecipeController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		716F7F43208E4F0C00FED47A /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				716025F72085CF790076A79B /* RecipeManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		C42A24D1DDAD9F446EC61098 /* Pods */ = {
@@ -455,12 +463,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-P10_Reciplease/Pods-P10_Reciplease-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

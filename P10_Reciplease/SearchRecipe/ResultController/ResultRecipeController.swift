@@ -48,8 +48,8 @@ extension ResultRecipeController {
         let recipe = SearchRecipe(with: recipeMatch[indexPath.row])
         cell.recipeTitle.text = recipe.title
         cell.recipeIngredient.text = recipe.ingredientList
-        cell.setRatingStar(rating: recipe.rating)
         cell.recipeTime.text = recipe.executionTime
+        cell.rateStars.rating = recipe.rating
         
         RecipeManager.sharedInstance.getRecipeImage(from: recipe.imageUrl){ (image, error) in
             if error == nil {

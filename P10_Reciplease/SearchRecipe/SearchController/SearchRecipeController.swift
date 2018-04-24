@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class SearchRecipeController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SearchRecipeController: UIViewController {
     
     @IBOutlet weak var ingredientText: UITextField!
     @IBOutlet weak var searchList: UITableView!
@@ -20,6 +20,10 @@ class SearchRecipeController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        setupContent()
+    }
+    
+    func setupContent() {
         RecipeManager.sharedInstance.addIngredient("eggs")
         RecipeManager.sharedInstance.addIngredient("cheese")
         
@@ -36,13 +40,6 @@ class SearchRecipeController: UIViewController, UITableViewDelegate, UITableView
             self.errorPopUp()
         }
     }
-    /// Show an error pop-up if the API request have a problem
-    func errorPopUp() {
-        let alertVC = UIAlertController(title: "", message: "Veuillez renseigner un ingrédient", preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-        
-        self.present(alertVC, animated: true, completion: nil)
-    }
     
     @IBAction func clearList(_ sender: Any) {
         RecipeManager.sharedInstance.clearIngredientList()
@@ -53,6 +50,17 @@ class SearchRecipeController: UIViewController, UITableViewDelegate, UITableView
         self.ingredientText.resignFirstResponder()
     }
     
+    /// Show an error pop-up if the API request have a problem
+    func errorPopUp() {
+        let alertVC = UIAlertController(title: "", message: "Veuillez renseigner un ingrédient", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        
+        self.present(alertVC, animated: true, completion: nil)
+    }
+    
+}
+
+extension SearchRecipeController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Ingredients"
     }
