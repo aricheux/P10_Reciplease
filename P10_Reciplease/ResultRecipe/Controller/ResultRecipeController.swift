@@ -12,18 +12,17 @@ import SwiftyJSON
 class ResultRecipeController: UITableViewController {
     
     var recipeMatches: JSON?
+    let loadingView = UIView()
+    let spinner = UIActivityIndicatorView()
+    let loadingLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupContent()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        searchRecipe()
-    }
-    
     func setupContent() {
+        setLoadingScreen()
         self.tableView.tableFooterView = UIView()
         searchRecipe()
     }
@@ -33,8 +32,37 @@ class ResultRecipeController: UITableViewController {
             if error == nil {
                 self.recipeMatches = jsonResult["matches"]
                 self.tableView.reloadData()
+                self.removeLoadingScreen()
             }
         }
+    }
+    
+    // Set the activity indicator into the main view
+    private func setLoadingScreen() {
+        let width: CGFloat = 120
+        let height: CGFloat = 30
+        let x = (tableView.frame.width / 2) - (width / 2)
+        let y = (tableView.frame.height / 2) - (height / 2) - (navigationController?.navigationBar.frame.height)!
+        loadingView.frame = CGRect(x: x, y: y, width: width, height: height)
+        
+        loadingLabel.textColor = .gray
+        loadingLabel.textAlignment = .center
+        loadingLabel.text = "Loading..."
+        loadingLabel.frame = CGRect(x: 0, y: 0, width: 140, height: 30)
+        
+        spinner.activityIndicatorViewStyle = .gray
+        spinner.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        spinner.startAnimating()
+        
+        loadingView.addSubview(spinner)
+        loadingView.addSubview(loadingLabel)
+        tableView.addSubview(loadingView)
+    }
+    
+    private func removeLoadingScreen() {
+        spinner.stopAnimating()
+        spinner.isHidden = true
+        loadingLabel.isHidden = true
     }
 }
 
@@ -48,10 +76,10 @@ extension ResultRecipeController {
             return UITableViewCell()
         }
         
-        let recipe = SearchRecipe(with: recipeMatch[indexPath.row])
-        cell.recipeTitle.text = recipe.title
+        let recipe = Recipe(with: recipeMatch[indexPath.row], type: .Search)
+        cell.recipeTitle.text = recipe.name
         cell.recipeIngredient.text = recipe.ingredientList
-        cell.recipeTime.text = recipe.executionTime
+        cell.recipeTime.text = recipe.totalTime
         cell.rateStars.rating = recipe.rating
         
         RecipeManager.sharedInstance.getRecipeImage(from: recipe.imageUrl){ (image, error) in

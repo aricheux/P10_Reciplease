@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class DetailRecipeController: UITableViewController {
     
-    var recipeData: DetailedRecipe?
+    var recipeData: Recipe?
     var recipeId = String()
     
     override func viewDidLoad() {
@@ -20,25 +20,34 @@ class DetailRecipeController: UITableViewController {
         setupRecipeDetail()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        setupRecipeDetail()
-    }
-    
     func setupContent() {
         let favoriteItem = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(favoriteTapped))
         favoriteItem.image = #imageLiteral(resourceName: "starEmpty")
         navigationItem.rightBarButtonItem = favoriteItem
         
+        tableView.tableFooterView = UIView()
         tableView.register(UINib(nibName: "RecipeImageCell", bundle: nil), forCellReuseIdentifier: "RecipeImageCell")
         tableView.register(UINib(nibName: "RecipeInfoCell", bundle: nil), forCellReuseIdentifier: "RecipeInfoCell")
         tableView.register(UINib(nibName: "RecipeWebCell", bundle: nil), forCellReuseIdentifier: "RecipeWebCell")
     }
     
     func setupRecipeDetail() {
+
         RecipeManager.sharedInstance.getRecipeDetail(with: recipeId) { (jsonResult, error) in
             if error == nil {
-                self.recipeData = DetailedRecipe(with: jsonResult)
-                self.tableView.reloadData()
+                self.recipeData = Recipe(with: jsonResult, type: .Detail)
+                self.getRecipeImage()
+            }
+        }
+    }
+    
+    func getRecipeImage() {
+        if let imageUrl = recipeData?.imageUrl {
+            RecipeManager.sharedInstance.getRecipeImage(from: imageUrl){ (image, error) in
+                if error == nil {
+                    self.recipeData?.largeImage = image
+                    self.tableView.reloadData()
+                }
             }
         }
     }
@@ -74,7 +83,7 @@ extension DetailRecipeController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 2 {
-            return recipeData?.ingredientLines.count ?? 0
+            return recipeData?.ingredients.count ?? 0
         } else {
             return 1
         }
@@ -89,13 +98,7 @@ extension DetailRecipeController {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeImageCell", for: indexPath) as! RecipeImageCell
-            
-            RecipeManager.sharedInstance.getRecipeImage(from: recipe.imageUrl){ (image, error) in
-                if error == nil {
-                    cell.recipeImage.image = image
-                    print("image upload")
-                }
-            }
+            cell.recipeImage.image = recipe.largeImage
             return cell
             
         case 1:
@@ -107,7 +110,7 @@ extension DetailRecipeController {
             
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-            cell.textLabel?.text = recipe.ingredientLines[indexPath.row].stringValue
+            cell.textLabel?.text = recipe.ingredients[indexPath.row].stringValue
             return cell
             
         case 3:
