@@ -8,16 +8,16 @@
 
 import UIKit
 import SwiftyJSON
+import CoreData
 
 class DetailRecipeController: UITableViewController {
     
-    var recipeData: Recipe?
-    var recipeId = String()
+    var recipe = Recipe()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupContent()
-        setupRecipeDetail()
+        getContent()
     }
     
     func setupContent() {
@@ -31,37 +31,58 @@ class DetailRecipeController: UITableViewController {
         tableView.register(UINib(nibName: "RecipeWebCell", bundle: nil), forCellReuseIdentifier: "RecipeWebCell")
     }
     
-    func setupRecipeDetail() {
-
-        RecipeManager.sharedInstance.getRecipeDetail(with: recipeId) { (jsonResult, error) in
+    func getContent() {
+        RecipeManager.sharedInstance.getRecipeDetail(with: recipe.id) { (jsonResult, error) in
             if error == nil {
-                self.recipeData = Recipe(with: jsonResult, type: .Detail)
-                self.getRecipeImage()
-            }
-        }
-    }
-    
-    func getRecipeImage() {
-        if let imageUrl = recipeData?.imageUrl {
-            RecipeManager.sharedInstance.getRecipeImage(from: imageUrl){ (image, error) in
-                if error == nil {
-                    self.recipeData?.largeImage = image
+                self.recipe.getDetailData(with: jsonResult) { (result) in
                     self.tableView.reloadData()
                 }
             }
         }
     }
     
+    
     @objc func showWebRecipe(_ sender: UIButton){
-        if let detailedUrl = recipeData?.sourceRecipeUrl {
-            if let url = URL(string: detailedUrl) {
-                UIApplication.shared.open(url, options: [:])
-            }
+        if let url = URL(string: recipe.sourceRecipeUrl) {
+            UIApplication.shared.open(url, options: [:])
         }
     }
     
     @objc func favoriteTapped() {
-        
+        saveRecipe()
+    }
+    
+    func saveRecipe() {
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+
+        let entity =
+            NSEntityDescription.entity(forEntityName: "CoreRecipe",
+                                       in: managedContext)!
+        let CoreRecipe = NSManagedObject(entity: entity,
+                                     insertInto: managedContext)
+        CoreRecipe.setValue(recipe.name, forKey: "name")
+        CoreRecipe.setValue(recipe.id, forKey: "id")
+        CoreRecipe.setValue(recipe.imageUrl, forKey: "imageUrl")
+        CoreRecipe.setValue(recipe.ingredientLines, forKey: "ingredientLines")
+        CoreRecipe.setValue(recipe.ingredientList, forKey: "ingredientList")
+        CoreRecipe.setValue(recipe.rating, forKey: "rating")
+        CoreRecipe.setValue(recipe.totalTime, forKey: "totalTime")
+        CoreRecipe.setValue(recipe.smallImage, forKey: "smallImage")
+        CoreRecipe.setValue(recipe.largeImage, forKey: "largeImage")
+        CoreRecipe.setValue(recipe.sourceRecipeUrl, forKey: "sourceRecipeUrl")
+                
+        do {
+            try managedContext.save()
+            print("save")
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
     }
 }
 extension DetailRecipeController {
@@ -83,17 +104,13 @@ extension DetailRecipeController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 2 {
-            return recipeData?.ingredients.count ?? 0
+            return recipe.ingredientLines.count
         } else {
             return 1
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        guard let recipe = recipeData  else {
-            return UITableViewCell()
-        }
         
         switch indexPath.section {
         case 0:
@@ -110,7 +127,7 @@ extension DetailRecipeController {
             
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-            cell.textLabel?.text = recipe.ingredients[indexPath.row].stringValue
+            cell.textLabel?.text = recipe.ingredientLines[indexPath.row]
             return cell
             
         case 3:

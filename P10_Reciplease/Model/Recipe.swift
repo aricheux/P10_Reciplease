@@ -14,56 +14,106 @@ enum RecipeType {
 }
 
 ///
-class Recipe {
+class Recipe: NSObject, NSCoding {
     var name: String
     var id: String
     var imageUrl: String
-    var ingredients: JSON
+    var ingredientLines: [String]
     var ingredientList: String
     var rating: Double
-    var totalTime: String?
-    var largeImage = UIImage()
+    var totalTime: String
+    var smallImage: UIImage
+    var largeImage: UIImage
     var sourceRecipeUrl: String
     
-    init (with json: JSON, type: RecipeType) {
-        switch type {
-        case .Search:
-            self.name = json["recipeName"].stringValue
-            self.id = json["id"].stringValue
-            self.imageUrl = json["imageUrlsBySize"]["90"].stringValue
-            self.imageUrl = self.imageUrl.replacingOccurrences(of: "\\", with: "")
-            self.ingredients = json["ingredients"]
-            self.ingredientList = ""
-            for i in 0...self.ingredients.count-1 {
-                self.ingredientList += self.ingredients[i].stringValue
-                if i < self.ingredients.count-1 {
-                    self.ingredientList += ", "
-                }
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.name, forKey: "name")
+        aCoder.encode(self.ingredientLines, forKey: "ingredientLines")
+        aCoder.encode(self.ingredientList, forKey: "ingredientList")
+        aCoder.encode(self.rating, forKey: "rating")
+        aCoder.encode(self.totalTime, forKey: "totalTime")
+        aCoder.encode(self.largeImage, forKey: "smallImage")
+        aCoder.encode(self.largeImage, forKey: "largeImage")
+        aCoder.encode(self.sourceRecipeUrl, forKey: "sourceRecipeUrl")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        guard let name = aDecoder.decodeObject(forKey: "name") as? String, let id = aDecoder.decodeObject(forKey: "id") as? String, let imageUrl = aDecoder.decodeObject(forKey: "imageUrl") as? String, let ingredientLines = aDecoder.decodeObject(forKey: "ingredientLines") as? [String], let ingredientList = aDecoder.decodeObject(forKey: "ingredientList") as? String, let rating = aDecoder.decodeObject(forKey: "rating") as? Double, let totalTime = aDecoder.decodeObject(forKey: "totalTime") as? String, let smallImage = aDecoder.decodeObject(forKey: "smallImage") as? UIImage, let largeImage = aDecoder.decodeObject(forKey: "largeImage") as? UIImage, let sourceRecipeUrl = aDecoder.decodeObject(forKey: "sourceRecipeUrl") as? String else {
+                return nil
+        }
+        
+        self.name = name
+        self.id = id
+        self.imageUrl = imageUrl
+        self.ingredientLines = ingredientLines
+        self.ingredientList = ingredientList
+        self.rating = rating
+        self.totalTime = totalTime
+        self.smallImage = smallImage
+        self.largeImage = largeImage
+        self.sourceRecipeUrl = sourceRecipeUrl
+    }
+    
+    override init() {
+        self.name = ""
+        self.id = ""
+        self.imageUrl = ""
+        self.ingredientLines = []
+        self.ingredientList = ""
+        self.rating = 0.0
+        self.totalTime = ""
+        self.smallImage = UIImage()
+        self.largeImage = UIImage()
+        self.sourceRecipeUrl = ""
+    }
+    
+    func getSearchData(with json: JSON, completion: @escaping (Bool) -> ()) {
+        self.name = json["recipeName"].stringValue
+        self.id = json["id"].stringValue
+        self.imageUrl = json["imageUrlsBySize"]["90"].stringValue
+        self.imageUrl = self.imageUrl.replacingOccurrences(of: "\\", with: "")
+        
+        let ingredientArray = json["ingredients"].arrayValue
+        self.ingredientList = ""
+        for i in 0...ingredientArray.count-1 {
+            self.ingredientList += ingredientArray[i].stringValue
+            if i < ingredientArray.count-1 {
+                self.ingredientList += ", "
             }
-            self.rating = json["rating"].doubleValue
-            self.sourceRecipeUrl = ""
-            self.totalTime = self.convertSecondInMinute(json["totalTimeInSeconds"].stringValue)
-            
-        case .Detail:
-            self.name = json["name"].stringValue
-            self.id = ""
-            self.totalTime = json["totalTime"].stringValue
-            self.imageUrl = json["images"][0]["hostedLargeUrl"].stringValue
-            self.imageUrl = self.imageUrl.replacingOccurrences(of: "\\", with: "")
-            self.sourceRecipeUrl = json["source"]["sourceRecipeUrl"].stringValue
-            self.sourceRecipeUrl = self.sourceRecipeUrl.replacingOccurrences(of: "\\", with: "")
-            self.ingredients = json["ingredientLines"]
-            self.ingredientList = ""
-            self.rating = json["rating"].doubleValue
+        }
+        
+        self.rating = json["rating"].doubleValue
+        let secondTime = json["totalTimeInSeconds"].intValue
+        let minute = (secondTime % 3600) / 60
+        self.totalTime = "\(minute)m"
+        self.sourceRecipeUrl = ""
+        
+        RecipeManager.sharedInstance.getRecipeImage(from: self.imageUrl){ (image, error) in
+            if error == nil {
+                self.smallImage = image
+                completion(true)
+            } else {
+                completion(false)
+            }
         }
     }
     
-    func convertSecondInMinute(_ stringSecond : String) -> String {
-        if let seconds = Int(stringSecond) {
-            let minutes = (seconds % 3600) / 60
-            
-            return "\(minutes)m"
+    func getDetailData(with json: JSON, completion: @escaping (Bool) -> ()) {
+        self.imageUrl = json["images"][0]["hostedLargeUrl"].stringValue
+        self.imageUrl = self.imageUrl.replacingOccurrences(of: "\\", with: "")
+        
+        self.sourceRecipeUrl = json["source"]["sourceRecipeUrl"].stringValue
+        self.sourceRecipeUrl = self.sourceRecipeUrl.replacingOccurrences(of: "\\", with: "")
+        
+        self.ingredientLines = json["ingredientLines"].arrayObject as! [String]
+        
+        RecipeManager.sharedInstance.getRecipeImage(from: self.imageUrl){ (image, error) in
+            if error == nil {
+                self.largeImage = image
+                completion(true)
+            } else {
+                completion(false)
+            }
         }
-        return "null"
     }
 }

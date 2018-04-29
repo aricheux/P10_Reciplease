@@ -26,30 +26,53 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BKo-Qf-QR9" customClass="CosmosView" customModule="Cosmos">
-                        <rect key="frame" x="10" y="30" width="128" height="29.5"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30 min" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l2y-7x-Umt">
-                        <rect key="frame" x="182" y="30" width="128" height="29.5"/>
+                        <rect key="frame" x="235" y="30" width="80" height="30"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BKo-Qf-QR9" customClass="CosmosView" customModule="Cosmos">
+                        <rect key="frame" x="0.0" y="30" width="160" height="30"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                <real key="value" value="30"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
+                                <color key="value" red="0.94117647059999998" green="0.76470588240000004" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="emptyBorderColor">
+                                <color key="value" red="0.94117647059999998" green="0.76470588240000004" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="filledBorderColor">
+                                <color key="value" red="0.94117647059999998" green="0.76470588240000004" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="fillMode">
+                                <integer key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="starMargin">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="MXh-mV-AaB" secondAttribute="trailing" id="CwU-57-hVv"/>
                     <constraint firstItem="MXh-mV-AaB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="F7A-E3-ZGl"/>
-                    <constraint firstAttribute="bottom" secondItem="BKo-Qf-QR9" secondAttribute="bottom" id="MF9-mG-Hma"/>
-                    <constraint firstItem="BKo-Qf-QR9" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.4" id="b04-ot-lNO"/>
+                    <constraint firstAttribute="bottom" secondItem="BKo-Qf-QR9" secondAttribute="bottom" id="H7b-LM-fKQ"/>
+                    <constraint firstItem="l2y-7x-Umt" firstAttribute="top" secondItem="MXh-mV-AaB" secondAttribute="bottom" id="HZ5-dG-Svv"/>
+                    <constraint firstItem="BKo-Qf-QR9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="LU7-8c-scV"/>
+                    <constraint firstItem="BKo-Qf-QR9" firstAttribute="top" secondItem="MXh-mV-AaB" secondAttribute="bottom" id="NKD-FG-oZx"/>
+                    <constraint firstAttribute="bottom" secondItem="l2y-7x-Umt" secondAttribute="bottom" id="Ufz-D3-Goh"/>
                     <constraint firstItem="MXh-mV-AaB" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.5" id="c7D-yg-G2o"/>
-                    <constraint firstAttribute="trailing" secondItem="l2y-7x-Umt" secondAttribute="trailing" constant="10" id="gH2-Yq-OT1"/>
-                    <constraint firstItem="l2y-7x-Umt" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.4" id="hz7-Fo-3ki"/>
-                    <constraint firstAttribute="bottom" secondItem="l2y-7x-Umt" secondAttribute="bottom" id="iMS-sF-MGA"/>
-                    <constraint firstItem="BKo-Qf-QR9" firstAttribute="top" secondItem="MXh-mV-AaB" secondAttribute="bottom" id="lUX-oT-WBd"/>
+                    <constraint firstAttribute="trailing" secondItem="l2y-7x-Umt" secondAttribute="trailing" constant="5" id="g2m-4b-lvu"/>
                     <constraint firstItem="MXh-mV-AaB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="pnK-6D-q8P"/>
-                    <constraint firstItem="BKo-Qf-QR9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="s4l-iQ-YWj"/>
-                    <constraint firstItem="l2y-7x-Umt" firstAttribute="top" secondItem="MXh-mV-AaB" secondAttribute="bottom" id="sO2-oL-jkt"/>
+                    <constraint firstItem="BKo-Qf-QR9" firstAttribute="width" secondItem="MXh-mV-AaB" secondAttribute="width" multiplier="0.5" id="u4h-Yw-Zix"/>
+                    <constraint firstItem="l2y-7x-Umt" firstAttribute="width" secondItem="BKo-Qf-QR9" secondAttribute="width" multiplier="0.5" id="xcD-Ti-1fn"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

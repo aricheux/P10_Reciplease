@@ -20,6 +20,7 @@ class RecipeManager {
     ///
     var ingredients: [String] = []
     var ingredientList = String()
+    var FavoriteRecipe: [Recipe] = []
     
     func searchRecipe(completion: @escaping (JSON, Error?) -> ()) {
         let yummyUrl = "http://api.yummly.com/v1/api/recipes?"

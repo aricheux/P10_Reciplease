@@ -6,8 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,109 +18,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="90" id="Mpm-Oc-L83" customClass="ResultRecipeCell" customModule="P10_Reciplease" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="Mpm-Oc-L83">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mpm-Oc-L83" id="379-OQ-ms9">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GYr-fV-YYm">
-                                            <rect key="frame" x="285" y="0.0" width="90" height="90"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="90" id="LYL-l2-baD"/>
-                                                <constraint firstAttribute="width" secondItem="GYr-fV-YYm" secondAttribute="height" multiplier="1:1" id="swB-TQ-8NX"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jd-95-S7J">
-                                            <rect key="frame" x="0.0" y="0.0" width="285" height="31.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                            <size key="shadowOffset" width="0.0" height="0.0"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V75-57-7Tm">
-                                            <rect key="frame" x="0.0" y="36.5" width="285" height="31.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                            <size key="shadowOffset" width="0.0" height="0.0"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vN3-wg-7ec">
-                                            <rect key="frame" x="187.5" y="69" width="97.5" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JE0-n6-XvV" customClass="CosmosView" customModule="Cosmos">
-                                            <rect key="frame" x="0.0" y="62.5" width="187.5" height="27"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="rating">
-                                                    <real key="value" value="5"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
-                                                    <integer key="value" value="5"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="starSize">
-                                                    <real key="value" value="25"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
-                                                    <color key="value" red="0.94117647058823528" green="0.76470588235294112" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="emptyBorderColor">
-                                                    <color key="value" red="0.94117647059999998" green="0.76470588240000004" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="filledBorderColor">
-                                                    <color key="value" red="0.94117647059999998" green="0.76470588240000004" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="fillMode">
-                                                    <integer key="value" value="1"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="minTouchRating">
-                                                    <real key="value" value="1"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="filledBorderWidth">
-                                                    <real key="value" value="1"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="emptyBorderWidth">
-                                                    <real key="value" value="1"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </view>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="vN3-wg-7ec" firstAttribute="leading" secondItem="JE0-n6-XvV" secondAttribute="trailing" id="0Si-L0-TMo"/>
-                                        <constraint firstItem="V75-57-7Tm" firstAttribute="height" secondItem="3jd-95-S7J" secondAttribute="height" id="3bd-vo-guU"/>
-                                        <constraint firstItem="3jd-95-S7J" firstAttribute="top" secondItem="379-OQ-ms9" secondAttribute="top" id="4FM-5q-FuB"/>
-                                        <constraint firstItem="GYr-fV-YYm" firstAttribute="leading" secondItem="V75-57-7Tm" secondAttribute="trailing" id="AdB-JN-TyD"/>
-                                        <constraint firstItem="JE0-n6-XvV" firstAttribute="height" secondItem="379-OQ-ms9" secondAttribute="height" multiplier="0.3" id="AjK-ik-sbp"/>
-                                        <constraint firstAttribute="trailing" secondItem="GYr-fV-YYm" secondAttribute="trailing" id="Doo-zR-4Em"/>
-                                        <constraint firstAttribute="bottom" secondItem="GYr-fV-YYm" secondAttribute="bottom" id="EPa-Gt-jXo"/>
-                                        <constraint firstItem="GYr-fV-YYm" firstAttribute="leading" secondItem="3jd-95-S7J" secondAttribute="trailing" id="EkX-ix-TeD"/>
-                                        <constraint firstItem="JE0-n6-XvV" firstAttribute="leading" secondItem="379-OQ-ms9" secondAttribute="leading" id="IMT-Ep-j91"/>
-                                        <constraint firstItem="JE0-n6-XvV" firstAttribute="width" secondItem="379-OQ-ms9" secondAttribute="width" multiplier="0.5" id="JNP-iz-e5R"/>
-                                        <constraint firstItem="3jd-95-S7J" firstAttribute="leading" secondItem="379-OQ-ms9" secondAttribute="leading" id="MPp-GJ-aoY"/>
-                                        <constraint firstItem="GYr-fV-YYm" firstAttribute="leading" secondItem="vN3-wg-7ec" secondAttribute="trailing" id="XCb-uw-5ag"/>
-                                        <constraint firstAttribute="bottom" secondItem="vN3-wg-7ec" secondAttribute="bottom" id="Xgt-Tm-85b"/>
-                                        <constraint firstItem="vN3-wg-7ec" firstAttribute="trailing" secondItem="GYr-fV-YYm" secondAttribute="leading" id="kFD-5T-FZ0"/>
-                                        <constraint firstAttribute="bottom" secondItem="JE0-n6-XvV" secondAttribute="bottom" id="lft-s1-xnh"/>
-                                        <constraint firstItem="GYr-fV-YYm" firstAttribute="top" secondItem="379-OQ-ms9" secondAttribute="top" id="s1M-LG-aCr"/>
-                                    </constraints>
                                 </tableViewCellContentView>
-                                <constraints>
-                                    <constraint firstItem="3jd-95-S7J" firstAttribute="height" secondItem="Mpm-Oc-L83" secondAttribute="height" multiplier="0.35" id="IVD-Lb-GU9"/>
-                                    <constraint firstItem="V75-57-7Tm" firstAttribute="top" secondItem="3jd-95-S7J" secondAttribute="bottom" constant="5" id="YuK-XV-7a3"/>
-                                    <constraint firstItem="V75-57-7Tm" firstAttribute="leading" secondItem="Mpm-Oc-L83" secondAttribute="leading" id="na5-9h-M12"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="rateStars" destination="JE0-n6-XvV" id="clX-fO-73R"/>
-                                    <outlet property="recipeImage" destination="GYr-fV-YYm" id="mVQ-d7-XP2"/>
-                                    <outlet property="recipeIngredient" destination="V75-57-7Tm" id="95v-Sd-wu9"/>
-                                    <outlet property="recipeTime" destination="vN3-wg-7ec" id="M5u-2c-oNp"/>
-                                    <outlet property="recipeTitle" destination="3jd-95-S7J" id="RVC-ci-yaZ"/>
-                                    <segue destination="84o-eo-9EL" kind="show" identifier="RecipeDetail" id="O3Y-3R-sSV"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -130,19 +32,18 @@
                             <outlet property="delegate" destination="Yyc-QC-gN5" id="glt-r6-XoZ"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="84o-eo-9EL" kind="show" identifier="RecipeDetail" id="3tF-5G-08p"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LYR-OO-D8H" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="z0l-nb-u9M">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </activityIndicatorView>
             </objects>
             <point key="canvasLocation" x="2157.5999999999999" y="-322.48875562218893"/>
         </scene>
         <!--DetailRecipe-->
         <scene sceneID="sLK-5s-Mcv">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="detailRecipe" storyboardName="DetailRecipe" id="84o-eo-9EL" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="DetailRecipe" id="84o-eo-9EL" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6fg-3d-10A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2877.5999999999999" y="-321.58920539730138"/>
