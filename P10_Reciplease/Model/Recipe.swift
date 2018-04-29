@@ -7,6 +7,7 @@
 //
 import Foundation
 import SwiftyJSON
+import CoreData
 
 enum RecipeType {
     case Search
@@ -115,5 +116,14 @@ class Recipe: NSObject, NSCoding {
                 completion(false)
             }
         }
+    }
+    
+    func getDataFromCoreData(with object: NSManagedObject) {
+        self.name = object.value(forKey: "name") as! String
+        let data = object.value(forKey: "ingredientLines") as! Data        
+        self.ingredientLines = NSKeyedUnarchiver.unarchiveObject(with: data) as! [String]
+        self.totalTime = object.value(forKey: "totalTime") as! String
+        self.rating = object.value(forKey: "rating") as! Double
+        self.largeImage = object.value(forKey: "largeImage") as! UIImage
     }
 }

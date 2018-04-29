@@ -60,13 +60,21 @@ extension FavoriteRecipeController {
         cell.recipeIngredient.text = favoriteRecipe[indexPath.row].value(forKey: "ingredientList") as? String
         cell.recipeTime.text = favoriteRecipe[indexPath.row].value(forKey: "totalTime") as? String
         cell.rateStars.rating = favoriteRecipe[indexPath.row].value(forKey: "rating") as! Double
-        cell.recipeImage.image = favoriteRecipe[indexPath.row].value(forKey: "largeImage") as? UIImage
+        cell.recipeImage.image = favoriteRecipe[indexPath.row].value(forKey: "smallImage") as? UIImage
         
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "FavoriteDetail", sender: self)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if segue.identifier == "FavoriteDetail" {
+            if let destination = segue.destination as? FavoriteDetailController, let recipeIndex = tableView.indexPathForSelectedRow?.row {
+                destination.managedObject = favoriteRecipe[recipeIndex]
+            }
+        }
     }
 }
 

@@ -3,7 +3,7 @@
     <entity name="CoreRecipe" representedClassName="CoreRecipe" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="ingredientLines" optional="YES" attributeType="Transformable" customClassName="[String]" syncable="YES"/>
+        <attribute name="ingredientLines" optional="YES" attributeType="Binary" customClassName="[String]" syncable="YES"/>
         <attribute name="ingredientList" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="largeImage" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
