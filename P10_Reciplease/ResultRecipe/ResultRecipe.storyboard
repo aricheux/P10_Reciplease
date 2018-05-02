@@ -12,7 +12,7 @@
         <!--Result Recipe Controller-->
         <scene sceneID="UiE-t8-0XB">
             <objects>
-                <tableViewController id="Yyc-QC-gN5" customClass="ResultRecipeController" customModule="P10_Reciplease" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ResultRecipe" id="Yyc-QC-gN5" customClass="ResultRecipeController" customModule="P10_Reciplease" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="AoW-vA-1dg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -32,21 +32,10 @@
                             <outlet property="delegate" destination="Yyc-QC-gN5" id="glt-r6-XoZ"/>
                         </connections>
                     </tableView>
-                    <connections>
-                        <segue destination="84o-eo-9EL" kind="show" identifier="RecipeDetail" id="3tF-5G-08p"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LYR-OO-D8H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2157.5999999999999" y="-322.48875562218893"/>
-        </scene>
-        <!--DetailRecipe-->
-        <scene sceneID="sLK-5s-Mcv">
-            <objects>
-                <viewControllerPlaceholder storyboardName="DetailRecipe" id="84o-eo-9EL" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6fg-3d-10A" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2738" y="-323"/>
         </scene>
     </scenes>
 </document>

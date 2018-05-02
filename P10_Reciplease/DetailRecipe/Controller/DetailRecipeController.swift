@@ -9,10 +9,10 @@
 import UIKit
 import SwiftyJSON
 import CoreData
+import Cosmos
 
-class FavoriteDetailController: UITableViewController {
+class DetailRecipeController: UITableViewController {
     
-    var managedObject: NSManagedObject?
     var recipe = Recipe()
     
     override func viewDidLoad() {
@@ -23,8 +23,15 @@ class FavoriteDetailController: UITableViewController {
     }
     
     func setupContent() {
-        let favoriteItem = UIBarButtonItem(title: "", style: .plain, target: self, action: #selector(favoriteTapped))
-        favoriteItem.image = #imageLiteral(resourceName: "starFull")
+
+        let starView = CosmosView()
+        starView.settings.totalStars = 1
+        starView.settings.starSize = 35
+        starView.settings.updateOnTouch = true
+        starView.rating = 0
+
+        let favoriteItem = UIBarButtonItem(customView: starView)
+        favoriteItem.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(favoriteTapped)))
         navigationItem.rightBarButtonItem = favoriteItem
         
         tableView.tableFooterView = UIView()
@@ -34,9 +41,12 @@ class FavoriteDetailController: UITableViewController {
     }
     
     func getContent() {
-        if let managedObject = managedObject {
-            recipe.getDataFromCoreData(with: managedObject)
-            self.tableView.reloadData()
+        RecipeManager.sharedInstance.getRecipeDetail(with: recipe.id) { (jsonResult, error) in
+            if error == nil {
+                self.recipe.getDetailData(with: jsonResult) { (result) in
+                    self.tableView.reloadData()
+                }
+            }
         }
     }
     
@@ -47,20 +57,41 @@ class FavoriteDetailController: UITableViewController {
     }
     
     @objc func favoriteTapped() {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        context.delete(managedObject!)
-        
-        do {
-            try context.save()
-            print("save")
-            _ = navigationController?.popToRootViewController(animated: true)
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
+        saveRecipe()
     }
     
+    func saveRecipe() {
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+
+        let context = appDelegate.persistentContainer.viewContext
+        if let entity = NSEntityDescription.entity(forEntityName: "CoreRecipe",in: context) {
+            let coreRecipe = NSManagedObject(entity: entity, insertInto: context)
+            
+            coreRecipe.setValue(recipe.name, forKey: "name")
+            coreRecipe.setValue(recipe.id, forKey: "id")
+            coreRecipe.setValue(recipe.imageUrl, forKey: "imageUrl")
+            let data = NSKeyedArchiver.archivedData(withRootObject: recipe.ingredientLines)
+            coreRecipe.setValue(data, forKey: "ingredientLines")
+            coreRecipe.setValue(recipe.ingredientList, forKey: "ingredientList")
+            coreRecipe.setValue(recipe.rating, forKey: "rating")
+            coreRecipe.setValue(recipe.totalTime, forKey: "totalTime")
+            coreRecipe.setValue(recipe.smallImage, forKey: "smallImage")
+            coreRecipe.setValue(recipe.largeImage, forKey: "largeImage")
+            coreRecipe.setValue(recipe.sourceRecipeUrl, forKey: "sourceRecipeUrl")
+            
+            do {
+                try context.save()
+                print("Recette save")
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+        }
+    }
 }
-extension FavoriteDetailController {
+extension DetailRecipeController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 4

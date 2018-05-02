@@ -122,8 +122,10 @@ class Recipe: NSObject, NSCoding {
         self.name = object.value(forKey: "name") as! String
         let data = object.value(forKey: "ingredientLines") as! Data        
         self.ingredientLines = NSKeyedUnarchiver.unarchiveObject(with: data) as! [String]
+        self.ingredientList = object.value(forKey: "ingredientList") as! String
         self.totalTime = object.value(forKey: "totalTime") as! String
         self.rating = object.value(forKey: "rating") as! Double
+        self.smallImage = object.value(forKey: "smallImage") as! UIImage
         self.largeImage = object.value(forKey: "largeImage") as! UIImage
     }
 }

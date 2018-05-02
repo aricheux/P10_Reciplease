@@ -12,7 +12,7 @@
         <!--Favorite Recipe Controller-->
         <scene sceneID="k1R-FI-ffX">
             <objects>
-                <tableViewController id="KvW-Hk-N4T" customClass="FavoriteRecipeController" customModule="P10_Reciplease" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="FavoriteRecipe" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KvW-Hk-N4T" customClass="FavoriteRecipeController" customModule="P10_Reciplease" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ob5-cR-pHC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -34,21 +34,10 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="eQs-Jy-6UP"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <segue destination="zhS-Z7-b7P" kind="show" identifier="FavoriteDetail" id="8UN-Si-l2S"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m6u-Ps-hoE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2232.8000000000002" y="323.38830584707648"/>
-        </scene>
-        <!--FavoriteDetail-->
-        <scene sceneID="ObI-S6-Etz">
-            <objects>
-                <viewControllerPlaceholder storyboardName="FavoriteDetail" id="zhS-Z7-b7P" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PJ8-yO-vEN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2875.1999999999998" y="322.93853073463271"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pEQ-ry-r9F">

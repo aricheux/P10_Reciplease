@@ -94,14 +94,9 @@ extension ResultRecipeController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "RecipeDetail", sender: self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "RecipeDetail" {
-            if let destination = segue.destination as? DetailRecipeController, let recipeIndex = tableView.indexPathForSelectedRow?.row {
-                destination.recipe = self.recipe[recipeIndex]
-            }
-        }
+        let mainStoryboard : UIStoryboard = UIStoryboard(name: "DetailRecipe", bundle:nil)
+        let vc: DetailRecipeController = mainStoryboard.instantiateViewController(withIdentifier: "DetailRecipe") as! DetailRecipeController
+        vc.recipe = self.recipe[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
