@@ -14,6 +14,7 @@ import Cosmos
 class DetailRecipeController: UITableViewController {
     
     var recipe = Recipe()
+    let starView = CosmosView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,12 +24,10 @@ class DetailRecipeController: UITableViewController {
     }
     
     func setupContent() {
-
-        let starView = CosmosView()
         starView.settings.totalStars = 1
         starView.settings.starSize = 35
-        starView.settings.updateOnTouch = true
-        starView.rating = 0
+        self.starView.rating = 0.0
+        starView.settings.updateOnTouch = false
 
         let favoriteItem = UIBarButtonItem(customView: starView)
         favoriteItem.customView?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(favoriteTapped)))
@@ -44,6 +43,11 @@ class DetailRecipeController: UITableViewController {
         RecipeManager.sharedInstance.getRecipeDetail(with: recipe.id) { (jsonResult, error) in
             if error == nil {
                 self.recipe.getDetailData(with: jsonResult) { (result) in
+                    if RecipeManager.sharedInstance.recipeIsFavorite(self.recipe.id){
+                        self.starView.rating = 1.0
+                    } else {
+                        self.starView.rating = 0.0
+                    }
                     self.tableView.reloadData()
                 }
             }
@@ -57,36 +61,18 @@ class DetailRecipeController: UITableViewController {
     }
     
     @objc func favoriteTapped() {
-        saveRecipe()
-    }
-    
-    func saveRecipe() {
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-
-        let context = appDelegate.persistentContainer.viewContext
-        if let entity = NSEntityDescription.entity(forEntityName: "CoreRecipe",in: context) {
-            let coreRecipe = NSManagedObject(entity: entity, insertInto: context)
-            
-            coreRecipe.setValue(recipe.name, forKey: "name")
-            coreRecipe.setValue(recipe.id, forKey: "id")
-            coreRecipe.setValue(recipe.imageUrl, forKey: "imageUrl")
-            let data = NSKeyedArchiver.archivedData(withRootObject: recipe.ingredientLines)
-            coreRecipe.setValue(data, forKey: "ingredientLines")
-            coreRecipe.setValue(recipe.ingredientList, forKey: "ingredientList")
-            coreRecipe.setValue(recipe.rating, forKey: "rating")
-            coreRecipe.setValue(recipe.totalTime, forKey: "totalTime")
-            coreRecipe.setValue(recipe.smallImage, forKey: "smallImage")
-            coreRecipe.setValue(recipe.largeImage, forKey: "largeImage")
-            coreRecipe.setValue(recipe.sourceRecipeUrl, forKey: "sourceRecipeUrl")
-            
-            do {
-                try context.save()
-                print("Recette save")
-            } catch let error as NSError {
-                print("Could not save. \(error), \(error.userInfo)")
+        if self.starView.rating == 0 {
+            RecipeManager.sharedInstance.saveToCoreData(self.recipe) { (success) in
+                if success {
+                    self.starView.rating = 1
+                }
+            }
+        } else {
+            RecipeManager.sharedInstance.deleteFromCoreData(self.recipe){ (success) in
+                if success {
+                    self.starView.rating = 0
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         }
     }

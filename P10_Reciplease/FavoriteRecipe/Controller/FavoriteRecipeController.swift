@@ -13,7 +13,6 @@ import SwiftyJSON
 class FavoriteRecipeController: UITableViewController {
     
     var favoriteRecipe: [Recipe] = []
-    var managedObject: [NSManagedObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,25 +30,19 @@ class FavoriteRecipeController: UITableViewController {
     }
     
     func getContent() {
-        
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CoreRecipe")
-        fetchRequest.returnsObjectsAsFaults = false
-        
-        do {
-            let fetch = try context.fetch(fetchRequest)
-            favoriteRecipe.removeAll()
-            managedObject = fetch as! [NSManagedObject]
-            if managedObject.count > 0 {
-                for i in 0...managedObject.count-1 {
-                    favoriteRecipe.append(Recipe())
-                    favoriteRecipe[i].getDataFromCoreData(with: managedObject[i])
+        RecipeManager.sharedInstance.loadFromCoreData() { (success) in
+            if success {
+                let coreDataRecipe = RecipeManager.sharedInstance.favoriteRecipe
+                
+                self.favoriteRecipe.removeAll()
+                if coreDataRecipe.count > 0 {
+                    for i in 0...coreDataRecipe.count-1 {
+                        self.favoriteRecipe.append(Recipe())
+                        self.favoriteRecipe[i].getDataFromCoreData(with: coreDataRecipe[i])
+                    }
                 }
+                self.tableView.reloadData()
             }
-            self.tableView.reloadData()
-            
-        }catch let err as NSError {
-            print(err.debugDescription)
         }
     }
 }

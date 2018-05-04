@@ -120,6 +120,7 @@ class Recipe: NSObject, NSCoding {
     
     func getDataFromCoreData(with object: NSManagedObject) {
         self.name = object.value(forKey: "name") as! String
+        self.id = object.value(forKey: "id") as! String
         let data = object.value(forKey: "ingredientLines") as! Data        
         self.ingredientLines = NSKeyedUnarchiver.unarchiveObject(with: data) as! [String]
         self.ingredientList = object.value(forKey: "ingredientList") as! String
