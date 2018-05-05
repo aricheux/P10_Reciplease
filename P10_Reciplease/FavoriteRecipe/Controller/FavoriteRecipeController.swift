@@ -76,7 +76,7 @@ extension FavoriteRecipeController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let mainStoryboard : UIStoryboard = UIStoryboard(name: "DetailRecipe", bundle:nil)
-        let vc: DetailRecipeController = mainStoryboard.instantiateViewController(withIdentifier: "DetailRecipe") as! DetailRecipeController
+        let vc = mainStoryboard.instantiateViewController(withIdentifier: "DetailRecipe") as! DetailRecipeController
         vc.recipe = favoriteRecipe[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }

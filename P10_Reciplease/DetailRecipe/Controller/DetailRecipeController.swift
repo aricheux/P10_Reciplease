@@ -80,15 +80,13 @@ class DetailRecipeController: UITableViewController {
 extension DetailRecipeController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if (section == 2) {
             return "Ingredients"
-        } else if (section == 3) {
-            return "Detailed instructions"
         } else {
             return ""
         }
@@ -122,13 +120,27 @@ extension DetailRecipeController {
             cell.textLabel?.text = recipe.ingredientLines[indexPath.row]
             return cell
             
-        case 3:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeWebCell", for: indexPath) as! RecipeWebCell
-            cell.getDirectionButton.addTarget(self, action: #selector(self.showWebRecipe(_:)), for: .touchUpInside)
-            return cell
-            
         default:
             return UITableViewCell()
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view  = tableView.dequeueReusableCell(withIdentifier: "RecipeWebCell") as! RecipeWebCell
+        view.getDirectionButton.addTarget(self, action: #selector(self.showWebRecipe(_:)), for: .touchUpInside)
+        
+        if section == 2 {
+            return view
+        } else {
+            return UIView()
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 2 {
+            return 80
+        } else {
+            return 0
         }
     }
     

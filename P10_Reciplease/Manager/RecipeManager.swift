@@ -86,7 +86,6 @@ class RecipeManager {
             }
             ingredientList += ingredients[i]
         }
-        print(ingredientList)
     }
     
     func recipeIsFavorite(_ id: String) -> Bool {

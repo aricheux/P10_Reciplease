@@ -1,5 +1,5 @@
 //
-//  ResultRecipeCell.swift
+//  SearchRecipeCell.swift
 //  P10_Reciplease
 //
 //  Created by RICHEUX Antoine on 05/05/2018.
@@ -7,16 +7,11 @@
 //
 
 import UIKit
-import Cosmos
 
-class ResultRecipeCell: UITableViewCell {
+class SearchRecipeCell: UITableViewCell {
+
+    @IBOutlet weak var getRecipe: UIButton!
     
-    @IBOutlet weak var recipeTitle: UILabel!
-    @IBOutlet weak var recipeIngredient: UILabel!
-    @IBOutlet weak var recipeImage: UIImageView!
-    @IBOutlet weak var rateStars: CosmosView!
-    @IBOutlet weak var recipeTime: UILabel!
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
