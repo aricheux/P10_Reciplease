@@ -26,10 +26,24 @@ class SearchRecipeController: UIViewController {
         RecipeManager.sharedInstance.addIngredient("eggs")
         RecipeManager.sharedInstance.addIngredient("cheese")
         
+        newIngredient.delegate = self
+        newIngredient.text = placeholder
+        newIngredient.textColor = .white
+        
+        setupBottomBorder()
         searchTable.tableFooterView = UIView()
         searchTable.register(UINib(nibName: "SearchClearCell", bundle: nil), forCellReuseIdentifier: "SearchClearCell")
         searchTable.register(UINib(nibName: "SearchRecipeCell", bundle: nil), forCellReuseIdentifier: "SearchRecipeCell")
         searchTable.reloadData()
+    }
+    
+    func setupBottomBorder(){
+        let bottomBorder = CALayer()
+        bottomBorder.borderColor = UIColor.white.cgColor
+        bottomBorder.borderWidth = 2
+        bottomBorder.frame = CGRect(x: 0, y: newIngredient.frame.height-1, width: newIngredient.frame.width-1, height: 1)
+        newIngredient.clipsToBounds = true
+        newIngredient.layer.addSublayer(bottomBorder)
     }
     
     func errorPopUp() {
@@ -37,6 +51,11 @@ class SearchRecipeController: UIViewController {
         alertVC.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
         
         self.present(alertVC, animated: true, completion: nil)
+    }
+    
+    @objc func clearList(_ sender: Any) {
+        RecipeManager.sharedInstance.clearIngredientList()
+        searchTable.reloadData()
     }
     
     @IBAction func addIngredientToList(_ sender: Any) {
@@ -49,15 +68,15 @@ class SearchRecipeController: UIViewController {
         }
     }
     
-    @objc func clearList(_ sender: Any) {
-        RecipeManager.sharedInstance.clearIngredientList()
-        searchTable.reloadData()
-    }
-    
-    @objc func goToResultPage( _ sender: Any){
+    @IBAction func goToResultPage( _ sender: Any){
         let mainStoryboard : UIStoryboard = UIStoryboard(name: "ResultRecipe", bundle:nil)
         let vc = mainStoryboard.instantiateViewController(withIdentifier: "ResultRecipe") as! ResultRecipeController
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    /// Dismiss keyboard if the user tap outside of it
+    @IBAction func dismissKeybord(_ sender: UITapGestureRecognizer) {
+        newIngredient.resignFirstResponder()
     }
 }
 
@@ -71,25 +90,6 @@ extension SearchRecipeController: UITableViewDelegate, UITableViewDataSource {
             return RecipeManager.sharedInstance.ingredients.count
         } else {
             return 1
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view  = tableView.dequeueReusableCell(withIdentifier: "SearchRecipeCell") as! SearchRecipeCell
-        view.getRecipe.addTarget(self, action: #selector(self.goToResultPage(_:)), for: .touchUpInside)
-        
-        if section == 1 {
-            return view
-        } else {
-            return UIView()
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == 1 {
-            return 80
-        } else {
-            return 0
         }
     }
     
@@ -113,26 +113,26 @@ extension SearchRecipeController: UITableViewDelegate, UITableViewDataSource {
 }
 
 /// Extension of UITextViewDelegate to handle the place holder
-extension SearchRecipeController: UITextViewDelegate {
+extension SearchRecipeController: UITextFieldDelegate {
     /// replace the placeholder by an empty string
-    func textViewDidBeginEditing(_ textView: UITextView)
+    func textFieldDidBeginEditing(_ textField: UITextField)
     {
-        if (textView.text == placeholder)
+        if (textField.text == placeholder)
         {
-            textView.text = ""
-            textView.textColor = .black
+            textField.text = ""
+            textField.textColor = .black
         }
-        textView.becomeFirstResponder()
+        textField.becomeFirstResponder()
     }
     
     /// Replace the empty text by a placeholder
-    func textViewDidEndEditing(_ textView: UITextView)
+    func textFieldDidEndEditing(_ textField: UITextField)
     {
-        if (textView.text == "")
+        if (textField.text == "")
         {
-            textView.text = placeholder
-            textView.textColor = .lightGray
+            textField.text = placeholder
+            textField.textColor = .white
         }
-        textView.resignFirstResponder()
+        textField.resignFirstResponder()
     }
 }

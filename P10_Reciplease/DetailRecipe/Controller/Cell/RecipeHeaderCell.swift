@@ -1,17 +1,15 @@
 //
-//  SearchRecipeCell.swift
+//  RecipeHeaderCell.swift
 //  P10_Reciplease
 //
-//  Created by RICHEUX Antoine on 05/05/2018.
+//  Created by RICHEUX Antoine on 06/05/2018.
 //  Copyright © 2018 Richeux Antoine. All rights reserved.
 //
 
 import UIKit
 
-class SearchRecipeCell: UITableViewCell {
+class RecipeHeaderCell: UITableViewCell {
 
-    @IBOutlet weak var getRecipe: UIButton!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

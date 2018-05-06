@@ -69,7 +69,7 @@ extension FavoriteRecipeController {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             cell.textLabel?.text = "Aucun favori enregisté"
-            cell.selectionStyle = .none
+            cell.textLabel?.textColor = UIColor.white
             return cell
         }
     }

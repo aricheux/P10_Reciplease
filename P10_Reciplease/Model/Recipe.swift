@@ -86,7 +86,7 @@ class Recipe: NSObject, NSCoding {
         self.rating = json["rating"].doubleValue
         let secondTime = json["totalTimeInSeconds"].intValue
         let minute = (secondTime % 3600) / 60
-        self.totalTime = "\(minute)m"
+        self.totalTime = "\(minute) min"
         self.sourceRecipeUrl = ""
         
         RecipeManager.sharedInstance.getRecipeImage(from: self.imageUrl){ (image, error) in
