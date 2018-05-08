@@ -64,7 +64,7 @@ class SearchRecipeController: UIViewController {
             newIngredient.text = ""
             searchTable.reloadData()
         } else {
-            self.errorPopUp()
+            _ = MessagePopUp("Erreur", "Veuillez renseigner un ingrédient", self)
         }
     }
     
@@ -120,7 +120,7 @@ extension SearchRecipeController: UITextFieldDelegate {
         if (textField.text == placeholder)
         {
             textField.text = ""
-            textField.textColor = .black
+            textField.textColor = .white
         }
         textField.becomeFirstResponder()
     }
@@ -131,7 +131,7 @@ extension SearchRecipeController: UITextFieldDelegate {
         if (textField.text == "")
         {
             textField.text = placeholder
-            textField.textColor = .white
+            textField.textColor = .gray
         }
         textField.resignFirstResponder()
     }

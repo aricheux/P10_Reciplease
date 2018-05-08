@@ -108,14 +108,19 @@ class Recipe: NSObject, NSCoding {
         
         self.ingredientLines = json["ingredientLines"].arrayObject as! [String]
         
-        RecipeManager.sharedInstance.getRecipeImage(from: self.imageUrl){ (image, error) in
-            if error == nil {
-                self.largeImage = image
-                completion(true)
-            } else {
-                completion(false)
+        if !self.imageUrl.isEmpty {
+            RecipeManager.sharedInstance.getRecipeImage(from: self.imageUrl){ (image, error) in
+                if error == nil {
+                    self.largeImage = image
+                    completion(true)
+                } else {
+                    completion(false)
+                }
             }
+        } else {
+            self.largeImage = #imageLiteral(resourceName: "starFull")
         }
+        
     }
     
     func getDataFromCoreData(with object: NSManagedObject) {

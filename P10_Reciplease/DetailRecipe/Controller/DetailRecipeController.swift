@@ -39,7 +39,7 @@ class DetailRecipeController: UITableViewController {
     
     func setupFavoriteItem() {
         starView.settings.totalStars = 1
-        starView.settings.starSize = 35
+        starView.settings.starSize = 25
         starView.rating = 0.0
         starView.settings.updateOnTouch = false
         
@@ -61,6 +61,8 @@ class DetailRecipeController: UITableViewController {
                     self.tableView.reloadData()
                     self.spinnerView.removeLoadingScreen()
                 }
+            } else {
+                _ = MessagePopUp("Erreur", "Erreur lors du chargement de la recette", self)
             }
         }
     }
@@ -76,6 +78,8 @@ class DetailRecipeController: UITableViewController {
             RecipeManager.sharedInstance.saveToCoreData(self.recipe) { (success) in
                 if success {
                     self.starView.rating = 1
+                } else {
+                    _ = MessagePopUp("Erreur", "Erreur lors de la sauvegarde de la recette", self)
                 }
             }
         } else {
@@ -83,6 +87,8 @@ class DetailRecipeController: UITableViewController {
                 if success {
                     self.starView.rating = 0
                     self.navigationController?.popViewController(animated: true)
+                } else {
+                    _ = MessagePopUp("Erreur", "Erreur lors de la suppression de la recette", self)
                 }
             }
         }
@@ -103,13 +109,29 @@ extension DetailRecipeController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0:
+            return recipe.largeImage.size.height * 3
+        case 1:
+            return 80 // Recipe title
+        case 2:
+            return 30 // Header
+        case 3:
+            return 25 // Ingredient list
+        case 4:
+            return 120 // Button
+        default:
+            return CGFloat()
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeImageCell", for: indexPath) as! RecipeImageCell
             cell.recipeImage.image = recipe.largeImage
-            cell.recipeImage.contentMode = .scaleAspectFit
             return cell
             
         case 1:

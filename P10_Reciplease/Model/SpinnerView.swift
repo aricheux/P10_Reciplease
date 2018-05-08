@@ -24,12 +24,12 @@ class SpinnerView {
             let y = (tableView.frame.height / 2) - (height / 2) - (nav.navigationBar.frame.height)
             loadingView.frame = CGRect(x: x, y: y, width: width, height: height)
             
-            loadingLabel.textColor = .gray
+            loadingLabel.textColor = .white
             loadingLabel.textAlignment = .center
             loadingLabel.text = "Loading..."
             loadingLabel.frame = CGRect(x: 0, y: 0, width: 140, height: 30)
             
-            spinner.activityIndicatorViewStyle = .gray
+            spinner.activityIndicatorViewStyle = .white
             spinner.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
             spinner.startAnimating()
             

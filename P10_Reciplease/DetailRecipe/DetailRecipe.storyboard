@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Reciplease-->
+        <!--Recipe detail-->
         <scene sceneID="4E6-ML-IBd">
             <objects>
                 <tableViewController storyboardIdentifier="DetailRecipe" id="XJl-bY-EaJ" customClass="DetailRecipeController" customModule="P10_Reciplease" customModuleProvider="target" sceneMemberID="viewController">
@@ -33,7 +33,9 @@
                             <outlet property="delegate" destination="XJl-bY-EaJ" id="OHE-Y2-08s"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Reciplease" id="yNW-Xj-Ivb"/>
+                    <navigationItem key="navigationItem" title="Recipe detail" id="yNW-Xj-Ivb">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="SEW-9f-bk8"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XSd-q9-ryQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

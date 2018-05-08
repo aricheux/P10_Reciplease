@@ -2,14 +2,13 @@
 //  RecipeImageCell.swift
 //  P10_Reciplease
 //
-//  Created by RICHEUX Antoine on 24/04/2018.
+//  Created by RICHEUX Antoine on 08/05/2018.
 //  Copyright © 2018 Richeux Antoine. All rights reserved.
 //
 
 import UIKit
 
 class RecipeImageCell: UITableViewCell {
-    
     
     @IBOutlet weak var recipeImage: UIImageView!
     

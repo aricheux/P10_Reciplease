@@ -10,6 +10,7 @@ target 'P10_Reciplease' do
   pod 'AlamofireImage'
   pod 'SwiftyJSON'
   pod 'Cosmos', '~> 15.0'
+  pod 'Spring'
 
   target 'P10_RecipleaseTests' do
     inherit! :search_paths

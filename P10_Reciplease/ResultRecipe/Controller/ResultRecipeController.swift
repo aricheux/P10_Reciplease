@@ -36,6 +36,8 @@ class ResultRecipeController: UITableViewController {
                 self.recipe.removeAll()
                 self.tableView.reloadData()
                 self.spinnerView.removeLoadingScreen()
+            } else {
+                _ = MessagePopUp("Erreur", "Erreur lors du chargement de la recette", self)
             }
         }
     }
