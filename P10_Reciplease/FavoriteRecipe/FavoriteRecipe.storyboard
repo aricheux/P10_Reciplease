@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Favorite-->
+        <!--Favorite recipe-->
         <scene sceneID="k1R-FI-ffX">
             <objects>
                 <tableViewController storyboardIdentifier="FavoriteRecipe" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KvW-Hk-N4T" customClass="FavoriteRecipeController" customModule="P10_Reciplease" customModuleProvider="target" sceneMemberID="viewController">
@@ -33,8 +33,8 @@
                             <outlet property="delegate" destination="KvW-Hk-N4T" id="lgF-mo-nDX"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Favorite" id="eQs-Jy-6UP">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="5CM-qO-wJh"/>
+                    <navigationItem key="navigationItem" title="Favorite recipe" id="eQs-Jy-6UP">
+                        <barButtonItem key="backBarButtonItem" title="Favorite" id="5CM-qO-wJh"/>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>

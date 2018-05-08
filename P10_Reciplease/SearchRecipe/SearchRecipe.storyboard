@@ -129,7 +129,7 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Reciplease" id="Gdo-rj-jDs">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="W5a-XW-SCn"/>
+                        <barButtonItem key="backBarButtonItem" title="Search" id="W5a-XW-SCn"/>
                     </navigationItem>
                     <connections>
                         <outlet property="newIngredient" destination="opA-hH-dpf" id="I5x-uK-qvn"/>
@@ -149,7 +149,7 @@
         <scene sceneID="SA2-q1-VEb">
             <objects>
                 <navigationController title="Reciplease" automaticallyAdjustsScrollViewInsets="NO" id="ijX-io-eQZ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="search" id="1aN-Wi-pwi"/>
+                    <tabBarItem key="tabBarItem" title="" systemItem="search" id="1aN-Wi-pwi"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="4bF-MK-u2O">

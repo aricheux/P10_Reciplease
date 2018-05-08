@@ -26,6 +26,7 @@ class Recipe: NSObject, NSCoding {
     var smallImage: UIImage
     var largeImage: UIImage
     var sourceRecipeUrl: String
+    var serving: String
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(self.name, forKey: "name")
@@ -36,10 +37,11 @@ class Recipe: NSObject, NSCoding {
         aCoder.encode(self.largeImage, forKey: "smallImage")
         aCoder.encode(self.largeImage, forKey: "largeImage")
         aCoder.encode(self.sourceRecipeUrl, forKey: "sourceRecipeUrl")
+        aCoder.encode(self.serving, forKey: "serving")
     }
     
     required init?(coder aDecoder: NSCoder) {
-        guard let name = aDecoder.decodeObject(forKey: "name") as? String, let id = aDecoder.decodeObject(forKey: "id") as? String, let imageUrl = aDecoder.decodeObject(forKey: "imageUrl") as? String, let ingredientLines = aDecoder.decodeObject(forKey: "ingredientLines") as? [String], let ingredientList = aDecoder.decodeObject(forKey: "ingredientList") as? String, let rating = aDecoder.decodeObject(forKey: "rating") as? Double, let totalTime = aDecoder.decodeObject(forKey: "totalTime") as? String, let smallImage = aDecoder.decodeObject(forKey: "smallImage") as? UIImage, let largeImage = aDecoder.decodeObject(forKey: "largeImage") as? UIImage, let sourceRecipeUrl = aDecoder.decodeObject(forKey: "sourceRecipeUrl") as? String else {
+        guard let name = aDecoder.decodeObject(forKey: "name") as? String, let id = aDecoder.decodeObject(forKey: "id") as? String, let imageUrl = aDecoder.decodeObject(forKey: "imageUrl") as? String, let ingredientLines = aDecoder.decodeObject(forKey: "ingredientLines") as? [String], let ingredientList = aDecoder.decodeObject(forKey: "ingredientList") as? String, let rating = aDecoder.decodeObject(forKey: "rating") as? Double, let totalTime = aDecoder.decodeObject(forKey: "totalTime") as? String, let smallImage = aDecoder.decodeObject(forKey: "smallImage") as? UIImage, let largeImage = aDecoder.decodeObject(forKey: "largeImage") as? UIImage, let sourceRecipeUrl = aDecoder.decodeObject(forKey: "sourceRecipeUrl") as? String, let serving = aDecoder.decodeObject(forKey: "serving") as? String else {
                 return nil
         }
         
@@ -53,6 +55,7 @@ class Recipe: NSObject, NSCoding {
         self.smallImage = smallImage
         self.largeImage = largeImage
         self.sourceRecipeUrl = sourceRecipeUrl
+        self.serving = serving
     }
     
     override init() {
@@ -66,6 +69,7 @@ class Recipe: NSObject, NSCoding {
         self.smallImage = UIImage()
         self.largeImage = UIImage()
         self.sourceRecipeUrl = ""
+        self.serving = ""
     }
     
     func getSearchData(with json: JSON, completion: @escaping (Bool) -> ()) {
@@ -102,7 +106,8 @@ class Recipe: NSObject, NSCoding {
     func getDetailData(with json: JSON, completion: @escaping (Bool) -> ()) {
         self.imageUrl = json["images"][0]["hostedLargeUrl"].stringValue
         self.imageUrl = self.imageUrl.replacingOccurrences(of: "\\", with: "")
-        
+        let numberOfServings = json["numberOfServings"].stringValue
+        self.serving = numberOfServings + " servings"
         self.sourceRecipeUrl = json["source"]["sourceRecipeUrl"].stringValue
         self.sourceRecipeUrl = self.sourceRecipeUrl.replacingOccurrences(of: "\\", with: "")
         
@@ -126,6 +131,7 @@ class Recipe: NSObject, NSCoding {
     func getDataFromCoreData(with object: NSManagedObject) {
         self.name = object.value(forKey: "name") as! String
         self.id = object.value(forKey: "id") as! String
+        self.serving = object.value(forKey: "serving") as! String
         let data = object.value(forKey: "ingredientLines") as! Data        
         self.ingredientLines = NSKeyedUnarchiver.unarchiveObject(with: data) as! [String]
         self.ingredientList = object.value(forKey: "ingredientList") as! String

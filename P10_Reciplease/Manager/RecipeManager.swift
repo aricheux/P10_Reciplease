@@ -119,6 +119,7 @@ class RecipeManager {
             
             coreRecipe.setValue(recipe.name, forKey: "name")
             coreRecipe.setValue(recipe.id, forKey: "id")
+            coreRecipe.setValue(recipe.serving, forKey: "serving")
             coreRecipe.setValue(recipe.imageUrl, forKey: "imageUrl")
             let data = NSKeyedArchiver.archivedData(withRootObject: recipe.ingredientLines)
             coreRecipe.setValue(data, forKey: "ingredientLines")

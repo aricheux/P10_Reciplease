@@ -14,6 +14,7 @@ class RecipeInfoCell: UITableViewCell {
     @IBOutlet weak var recipeName: UILabel!
     @IBOutlet weak var recipeRating: CosmosView!
     @IBOutlet weak var recipeTime: UILabel!
+    @IBOutlet weak var recipeServing: UILabel!
     
     
     override func awakeFromNib() {

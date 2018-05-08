@@ -24,6 +24,7 @@ class ResultRecipeController: UITableViewController {
     }
     
     func setupContent() {
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Result", style: .plain, target: nil, action: nil)
         spinnerView.setLoadingScreen(tableView: tableView, navigationController: navigationController)
         tableView.tableFooterView = UIView()
         tableView.register(UINib(nibName: "ResultRecipeCell", bundle: nil), forCellReuseIdentifier: "ResultRecipeCell")

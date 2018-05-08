@@ -112,7 +112,7 @@ extension DetailRecipeController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            return recipe.largeImage.size.height * 3
+            return tableView.frame.width / 1.5
         case 1:
             return 80 // Recipe title
         case 2:
@@ -132,6 +132,7 @@ extension DetailRecipeController {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeImageCell", for: indexPath) as! RecipeImageCell
             cell.recipeImage.image = recipe.largeImage
+            print(cell.frame)
             return cell
             
         case 1:
@@ -139,6 +140,7 @@ extension DetailRecipeController {
             cell.recipeName.text = recipe.name
             cell.recipeTime.text = recipe.totalTime
             cell.recipeRating.rating = recipe.rating
+            cell.recipeServing.text = recipe.serving
             return cell
             
         case 2:
