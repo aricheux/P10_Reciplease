@@ -56,15 +56,19 @@ class RecipeManager {
     }
     
     func getRecipeImage(from url: String, completion: @escaping (UIImage, Error?) -> ()) {
-        Alamofire.request(url).responseImage { response in
-            switch response.result {
-            case .success:
-                if let image = response.result.value {
-                    completion(image, nil)
+        if !url.isEmpty {
+            Alamofire.request(url).responseImage { response in
+                switch response.result {
+                case .success:
+                    if let image = response.result.value {
+                        completion(image, nil)
+                    }
+                case .failure(let error):
+                    completion(UIImage(), error)
                 }
-            case .failure(let error):
-                completion(UIImage(), error)
             }
+        } else {
+            completion( #imageLiteral(resourceName: "defaultImage"), nil)
         }
     }
     

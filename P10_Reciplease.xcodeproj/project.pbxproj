@@ -13,6 +13,8 @@
 		7112C29F2096657F00F478F3 /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 718638B420945FAE0001748A /* Reciplease.xcdatamodeld */; };
 		7121449020A1A22D00D66870 /* RecipeImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7121448E20A1A22D00D66870 /* RecipeImageCell.swift */; };
 		7121449120A1A22D00D66870 /* RecipeImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7121448F20A1A22D00D66870 /* RecipeImageCell.xib */; };
+		7121449520A21B8E00D66870 /* NoFavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7121449320A21B8E00D66870 /* NoFavoriteCell.swift */; };
+		7121449620A21B8E00D66870 /* NoFavoriteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7121449420A21B8E00D66870 /* NoFavoriteCell.xib */; };
 		712D56AA208A574E00505903 /* DetailRecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712D56A9208A574E00505903 /* DetailRecipeController.swift */; };
 		716025B92085CB530076A79B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716025B82085CB530076A79B /* AppDelegate.swift */; };
 		716025BB2085CB530076A79B /* SearchRecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716025BA2085CB530076A79B /* SearchRecipeController.swift */; };
@@ -70,6 +72,8 @@
 		7109BFCA209CF92100C737B6 /* SearchClearCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchClearCell.xib; sourceTree = "<group>"; };
 		7121448E20A1A22D00D66870 /* RecipeImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeImageCell.swift; sourceTree = "<group>"; };
 		7121448F20A1A22D00D66870 /* RecipeImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecipeImageCell.xib; sourceTree = "<group>"; };
+		7121449320A21B8E00D66870 /* NoFavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoFavoriteCell.swift; sourceTree = "<group>"; };
+		7121449420A21B8E00D66870 /* NoFavoriteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoFavoriteCell.xib; sourceTree = "<group>"; };
 		712D56A9208A574E00505903 /* DetailRecipeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRecipeController.swift; sourceTree = "<group>"; };
 		716025B52085CB530076A79B /* P10_Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = P10_Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		716025B82085CB530076A79B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -173,6 +177,15 @@
 			children = (
 				7109BFC9209CF92100C737B6 /* SearchClearCell.swift */,
 				7109BFCA209CF92100C737B6 /* SearchClearCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		7121449220A21B5100D66870 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7121449320A21B8E00D66870 /* NoFavoriteCell.swift */,
+				7121449420A21B8E00D66870 /* NoFavoriteCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -285,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				716025BC2085CB530076A79B /* FavoriteRecipeController.swift */,
+				7121449220A21B5100D66870 /* Cell */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -476,6 +490,7 @@
 			files = (
 				716F7F60208F509D00FED47A /* RecipeWebCell.xib in Resources */,
 				716025F02085CC380076A79B /* FavoriteRecipe.storyboard in Resources */,
+				7121449620A21B8E00D66870 /* NoFavoriteCell.xib in Resources */,
 				716025EE2085CC140076A79B /* SearchRecipe.storyboard in Resources */,
 				716F7F58208F505700FED47A /* RecipeInfoCell.xib in Resources */,
 				716025C52085CB550076A79B /* LaunchScreen.storyboard in Resources */,
@@ -681,6 +696,7 @@
 				716F7F5F208F509D00FED47A /* RecipeWebCell.swift in Sources */,
 				716025FA208613CA0076A79B /* Recipe.swift in Sources */,
 				716025F42085CCAD0076A79B /* ResultRecipeController.swift in Sources */,
+				7121449520A21B8E00D66870 /* NoFavoriteCell.swift in Sources */,
 				7121449020A1A22D00D66870 /* RecipeImageCell.swift in Sources */,
 				71DF7B3B209E069C00007FBA /* ResultRecipeCell.swift in Sources */,
 				7109BFCB209CF92100C737B6 /* SearchClearCell.swift in Sources */,

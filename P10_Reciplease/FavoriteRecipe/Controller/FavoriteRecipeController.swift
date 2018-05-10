@@ -27,6 +27,7 @@ class FavoriteRecipeController: UITableViewController {
     func setupContent() {
         tableView.tableFooterView = UIView()
         tableView.register(UINib(nibName: "ResultRecipeCell", bundle: nil), forCellReuseIdentifier: "ResultRecipeCell")
+        tableView.register(UINib(nibName: "NoFavoriteCell", bundle: nil), forCellReuseIdentifier: "NoFavoriteCell")
     }
     
     func getContent() {
@@ -50,8 +51,10 @@ class FavoriteRecipeController: UITableViewController {
 extension FavoriteRecipeController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if favoriteRecipe.count > 0 {
+            tableView.allowsSelection = true
             return favoriteRecipe.count
         }
+        tableView.allowsSelection = false
         return 1
     }
     
@@ -67,9 +70,8 @@ extension FavoriteRecipeController {
             cell.recipeImage.image = favoriteRecipe[indexPath.row].smallImage
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-            cell.textLabel?.text = "Aucun favori enregisté"
-            cell.textLabel?.textColor = UIColor.white
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NoFavoriteCell", for: indexPath) as! NoFavoriteCell
+            
             return cell
         }
     }

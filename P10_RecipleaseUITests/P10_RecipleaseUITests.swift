@@ -29,8 +29,48 @@ class P10_RecipleaseUITests: XCTestCase {
     }
     
     func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let app = XCUIApplication()
+        app.tables.buttons["Clear"].tap()
+        
+        let element = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element
+        element.children(matching: .textField).element.tap()
+        
+        let addButton = app.buttons["Add"]
+        addButton.tap()
+        sleep(1)
+        app.alerts["Erreur"].buttons["Ok"].tap()
+        app.typeText("eggs")
+        addButton.tap()
+        app.typeText("cheese")
+        addButton.tap()
+        element.children(matching: .table).element.tap()
+        app.tabBars.buttons["Favorites"].tap()
+        sleep(2)
+        app.tabBars.buttons["Search"].tap()
+        app.buttons["Search for recipe"].tap()
+        sleep(2)
+ 
+        let tablesQuery = app.tables
+        tablesQuery.staticTexts["English muffins, cooked bacon, shredded cheddar cheese, large eggs, kosher salt"].tap()
+        
+        let recipeDetailNavigationBar = app.navigationBars["Recipe detail"]
+        let ratingElement = recipeDetailNavigationBar.otherElements["Rating"]
+        ratingElement.tap()
+        sleep(1)
+        recipeDetailNavigationBar.buttons["Result"].tap()
+        tablesQuery.staticTexts["Broccoli and Cheese Mini Egg Omelets"].tap()
+        ratingElement.tap()
+        sleep(1)
+        app.tabBars.buttons["Favorites"].tap()
+        sleep(1)
+        
+        app.tables.children(matching: .cell).element(boundBy: 0).staticTexts["English muffins, cooked bacon, shredded cheddar cheese, large eggs, kosher salt"].tap()
+        app.navigationBars["Recipe detail"].otherElements["Rating"].tap()
+        app.tables.children(matching: .cell).element(boundBy: 0).staticTexts["Broccoli and Cheese Mini Egg Omelets"].tap()
+        tablesQuery.staticTexts[" - 1/4 cup reduced fat shredded cheddar (Sargento)"].swipeUp()
+        tablesQuery.buttons["Show website"].tap()
+        
     }
     
 }

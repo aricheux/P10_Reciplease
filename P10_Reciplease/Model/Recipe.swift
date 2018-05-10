@@ -89,8 +89,13 @@ class Recipe: NSObject, NSCoding {
         
         self.rating = json["rating"].doubleValue
         let secondTime = json["totalTimeInSeconds"].intValue
-        let minute = (secondTime % 3600) / 60
-        self.totalTime = "\(minute) min"
+        if secondTime > 0 {
+            let minute = (secondTime % 3600) / 60
+            self.totalTime = "\(minute) min"
+        } else {
+            self.totalTime = "n/d"
+        }
+        
         self.sourceRecipeUrl = ""
         
         RecipeManager.sharedInstance.getRecipeImage(from: self.imageUrl){ (image, error) in
@@ -122,8 +127,6 @@ class Recipe: NSObject, NSCoding {
                     completion(false)
                 }
             }
-        } else {
-            self.largeImage = #imageLiteral(resourceName: "starFull")
         }
         
     }

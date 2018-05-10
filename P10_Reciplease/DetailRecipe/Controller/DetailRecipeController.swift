@@ -25,6 +25,10 @@ class DetailRecipeController: UITableViewController {
         getContent()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        getContent()
+    }
+    
     func setupContent() {
         spinnerView.setLoadingScreen(tableView: tableView, navigationController: navigationController)
         numberOfSection = 0
@@ -132,7 +136,6 @@ extension DetailRecipeController {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeImageCell", for: indexPath) as! RecipeImageCell
             cell.recipeImage.image = recipe.largeImage
-            print(cell.frame)
             return cell
             
         case 1:

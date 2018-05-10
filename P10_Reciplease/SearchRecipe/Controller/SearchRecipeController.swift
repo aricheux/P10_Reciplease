@@ -46,13 +46,6 @@ class SearchRecipeController: UIViewController {
         newIngredient.layer.addSublayer(bottomBorder)
     }
     
-    func errorPopUp() {
-        let alertVC = UIAlertController(title: "", message: "Veuillez renseigner un ingrédient", preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-        
-        self.present(alertVC, animated: true, completion: nil)
-    }
-    
     @objc func clearList(_ sender: Any) {
         RecipeManager.sharedInstance.clearIngredientList()
         searchTable.reloadData()
