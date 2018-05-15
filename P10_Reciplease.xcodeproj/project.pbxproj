@@ -37,6 +37,7 @@
 		716F7F5F208F509D00FED47A /* RecipeWebCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716F7F5D208F509D00FED47A /* RecipeWebCell.swift */; };
 		716F7F60208F509D00FED47A /* RecipeWebCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 716F7F5E208F509D00FED47A /* RecipeWebCell.xib */; };
 		718638B620945FAE0001748A /* Reciplease.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 718638B420945FAE0001748A /* Reciplease.xcdatamodeld */; };
+		71C4DBBA20AB3D43005BA7D7 /* ingredient.json in Resources */ = {isa = PBXBuildFile; fileRef = 71C4DBB920AB3D42005BA7D7 /* ingredient.json */; };
 		71DEF18D20A0C2210038536E /* MessagePopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DEF18C20A0C2210038536E /* MessagePopUp.swift */; };
 		71DF7B3B209E069C00007FBA /* ResultRecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DF7B39209E069C00007FBA /* ResultRecipeCell.swift */; };
 		71DF7B3C209E069C00007FBA /* ResultRecipeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71DF7B3A209E069C00007FBA /* ResultRecipeCell.xib */; };
@@ -102,6 +103,7 @@
 		716F7F5D208F509D00FED47A /* RecipeWebCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeWebCell.swift; sourceTree = "<group>"; };
 		716F7F5E208F509D00FED47A /* RecipeWebCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecipeWebCell.xib; sourceTree = "<group>"; };
 		718638B520945FAE0001748A /* FavoriteRecipe.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoriteRecipe.xcdatamodel; sourceTree = "<group>"; };
+		71C4DBB920AB3D42005BA7D7 /* ingredient.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ingredient.json; sourceTree = "<group>"; };
 		71DEF18C20A0C2210038536E /* MessagePopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePopUp.swift; sourceTree = "<group>"; };
 		71DF7B39209E069C00007FBA /* ResultRecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultRecipeCell.swift; sourceTree = "<group>"; };
 		71DF7B3A209E069C00007FBA /* ResultRecipeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultRecipeCell.xib; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 		716025E82085CB680076A79B /* Ressource */ = {
 			isa = PBXGroup;
 			children = (
+				71C4DBB920AB3D42005BA7D7 /* ingredient.json */,
 				718638B420945FAE0001748A /* Reciplease.xcdatamodeld */,
 				716025C62085CB550076A79B /* Info.plist */,
 				716025C32085CB550076A79B /* LaunchScreen.storyboard */,
@@ -488,6 +491,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71C4DBBA20AB3D43005BA7D7 /* ingredient.json in Resources */,
 				716F7F60208F509D00FED47A /* RecipeWebCell.xib in Resources */,
 				716025F02085CC380076A79B /* FavoriteRecipe.storyboard in Resources */,
 				7121449620A21B8E00D66870 /* NoFavoriteCell.xib in Resources */,
@@ -581,6 +585,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
+				"${BUILT_PRODUCTS_DIR}/SearchTextField/SearchTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/Spring/Spring.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
@@ -589,6 +594,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SearchTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Spring.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -879,10 +885,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q6R42C3K2F;
 				INFOPLIST_FILE = "$(SRCROOT)/P10_Reciplease/Ressource/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.aricheux.P10-Reciplease";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -898,10 +901,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q6R42C3K2F;
 				INFOPLIST_FILE = "$(SRCROOT)/P10_Reciplease/Ressource/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.aricheux.P10-Reciplease";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -918,11 +918,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q6R42C3K2F;
 				INFOPLIST_FILE = P10_RecipleaseTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.aricheux.P10-RecipleaseTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -940,11 +936,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q6R42C3K2F;
 				INFOPLIST_FILE = P10_RecipleaseTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.aricheux.P10-RecipleaseTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -961,11 +953,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q6R42C3K2F;
 				INFOPLIST_FILE = P10_RecipleaseUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.aricheux.P10-RecipleaseUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -982,11 +970,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q6R42C3K2F;
 				INFOPLIST_FILE = P10_RecipleaseUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.aricheux.P10-RecipleaseUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

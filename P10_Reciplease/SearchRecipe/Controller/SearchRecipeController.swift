@@ -8,33 +8,46 @@
 
 import UIKit
 import SwiftyJSON
+import SearchTextField
 
 class SearchRecipeController: UIViewController {
     
-    let placeholder = "eggs, cheese, ham, ..."
-    
-    @IBOutlet weak var newIngredient: UITextField!
+    @IBOutlet weak var newIngredient: SearchTextField!
     @IBOutlet weak var searchTable: UITableView!
+    let popUp = MessagePopUp()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupContent()
-    }
-    
-    func setupContent() {
+        // To delete
         RecipeManager.sharedInstance.addIngredient("eggs")
         RecipeManager.sharedInstance.addIngredient("cheese")
         
-        newIngredient.delegate = self
-        newIngredient.text = placeholder
-        newIngredient.textColor = .white
-        
+        setupIngredientTextStyle()
         setupBottomBorder()
-        searchTable.tableFooterView = UIView()
-        searchTable.register(UINib(nibName: "SearchClearCell", bundle: nil), forCellReuseIdentifier: "SearchClearCell")
-        searchTable.register(UINib(nibName: "SearchRecipeCell", bundle: nil), forCellReuseIdentifier: "SearchRecipeCell")
-        searchTable.reloadData()
+        setupTableView()
+    }
+    
+    func setupIngredientTextStyle() {
+        if let path = Bundle.main.path(forResource: "ingredient", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+                if let jsonResult = jsonResult as? Dictionary<String, AnyObject>, let ingredients = jsonResult["ingredient"] as? [String] {
+                    self.newIngredient.filterStrings(ingredients)
+                }
+            } catch {
+                // handle error
+            }
+        }
+        
+        newIngredient.theme.bgColor = UIColor.white
+        newIngredient.theme.fontColor = UIColor.black
+        newIngredient.theme.font = UIFont.systemFont(ofSize: 15)
+        newIngredient.theme.separatorColor = UIColor.gray
+        newIngredient.theme.cellHeight = 30
+        newIngredient.highlightAttributes = [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 15)]
+        newIngredient.theme.placeholderColor = UIColor.lightGray
     }
     
     func setupBottomBorder(){
@@ -46,18 +59,25 @@ class SearchRecipeController: UIViewController {
         newIngredient.layer.addSublayer(bottomBorder)
     }
     
+    func setupTableView() {
+        searchTable.tableFooterView = UIView()
+        searchTable.register(UINib(nibName: "SearchClearCell", bundle: nil), forCellReuseIdentifier: "SearchClearCell")
+        searchTable.register(UINib(nibName: "SearchRecipeCell", bundle: nil), forCellReuseIdentifier: "SearchRecipeCell")
+        searchTable.reloadData()
+    }
+    
     @objc func clearList(_ sender: Any) {
         RecipeManager.sharedInstance.clearIngredientList()
         searchTable.reloadData()
     }
     
     @IBAction func addIngredientToList(_ sender: Any) {
-        if let ingredient = newIngredient.text, !ingredient.isEmpty, ingredient != placeholder {
+        if let ingredient = newIngredient.text, !ingredient.isEmpty {
             RecipeManager.sharedInstance.addIngredient(ingredient)
             newIngredient.text = ""
             searchTable.reloadData()
         } else {
-            _ = MessagePopUp("Erreur", "Veuillez renseigner un ingrédient", self)
+            self.popUp.showMessageWith("Erreur", "Veuillez renseigner un ingrédient", self, completion: { _ in })
         }
     }
     
@@ -98,34 +118,34 @@ extension SearchRecipeController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = " - " + RecipeManager.sharedInstance.ingredients[indexPath.row]
             cell.textLabel?.textColor = UIColor.white
             return cell
-        
+            
         default:
             return UITableViewCell()
         }
     }
 }
 
-/// Extension of UITextViewDelegate to handle the place holder
-extension SearchRecipeController: UITextFieldDelegate {
-    /// replace the placeholder by an empty string
-    func textFieldDidBeginEditing(_ textField: UITextField)
-    {
-        if (textField.text == placeholder)
-        {
-            textField.text = ""
-            textField.textColor = .white
-        }
-        textField.becomeFirstResponder()
-    }
-    
-    /// Replace the empty text by a placeholder
-    func textFieldDidEndEditing(_ textField: UITextField)
-    {
-        if (textField.text == "")
-        {
-            textField.text = placeholder
-            textField.textColor = .gray
-        }
-        textField.resignFirstResponder()
-    }
-}
+///// Extension of UITextViewDelegate to handle the place holder
+//extension SearchRecipeController: UITextFieldDelegate {
+//    /// replace the placeholder by an empty string
+//    func textFieldDidBeginEditing(_ textField: UITextField)
+//    {
+//        if (textField.text == placeholder)
+//        {
+//            textField.text = ""
+//            textField.textColor = .white
+//        }
+//        textField.becomeFirstResponder()
+//    }
+//
+//    /// Replace the empty text by a placeholder
+//    func textFieldDidEndEditing(_ textField: UITextField)
+//    {
+//        if (textField.text == "")
+//        {
+//            textField.text = placeholder
+//            textField.textColor = .gray
+//        }
+//        textField.resignFirstResponder()
+//    }
+//}

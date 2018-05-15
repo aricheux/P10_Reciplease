@@ -94,7 +94,7 @@
                                     <action selector="goToResultPage:" destination="zga-jB-KdU" eventType="touchUpInside" id="lTa-ML-cYC"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="opA-hH-dpf">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="eggs, cheese, ham..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="opA-hH-dpf" customClass="SearchTextField" customModule="SearchTextField">
                                 <rect key="frame" x="16" y="51" width="265" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="JAI-EM-jlv"/>

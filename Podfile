@@ -11,6 +11,7 @@ target 'P10_Reciplease' do
   pod 'SwiftyJSON'
   pod 'Cosmos', '~> 15.0'
   pod 'Spring'
+  pod 'SearchTextField'
 
   target 'P10_RecipleaseTests' do
     inherit! :search_paths

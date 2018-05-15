@@ -14,6 +14,7 @@ class ResultRecipeController: UITableViewController {
     var recipeMatches: JSON?
     var recipe: [Recipe] = []
     let spinnerView = SpinnerView()
+    let popUp = MessagePopUp()
 
     
     override func viewDidLoad() {
@@ -38,7 +39,7 @@ class ResultRecipeController: UITableViewController {
                 self.tableView.reloadData()
                 self.spinnerView.removeLoadingScreen()
             } else {
-                _ = MessagePopUp("Erreur", "Erreur lors du chargement de la recette", self)
+                self.popUp.showMessageWith("Erreur", "Erreur lors du chargement de la recette", self, completion: { _ in })
             }
         }
     }

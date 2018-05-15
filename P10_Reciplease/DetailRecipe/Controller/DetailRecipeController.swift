@@ -17,6 +17,7 @@ class DetailRecipeController: UITableViewController {
     let starView = CosmosView()
     let spinnerView = SpinnerView()
     var numberOfSection: Int?
+    let popUp = MessagePopUp()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +67,11 @@ class DetailRecipeController: UITableViewController {
                     self.spinnerView.removeLoadingScreen()
                 }
             } else {
-                _ = MessagePopUp("Erreur", "Erreur lors du chargement de la recette", self)
+                self.popUp.showMessageWith("Erreur", "Erreur lors du chargement de la recette", self, completion: { (choice) in
+                    if choice == .OkPushed {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                })
             }
         }
     }
@@ -83,7 +88,7 @@ class DetailRecipeController: UITableViewController {
                 if success {
                     self.starView.rating = 1
                 } else {
-                    _ = MessagePopUp("Erreur", "Erreur lors de la sauvegarde de la recette", self)
+                    self.popUp.showMessageWith("Erreur", "Erreur lors de la sauvegarde de la recette", self, completion: { _ in })
                 }
             }
         } else {
@@ -92,7 +97,7 @@ class DetailRecipeController: UITableViewController {
                     self.starView.rating = 0
                     self.navigationController?.popViewController(animated: true)
                 } else {
-                    _ = MessagePopUp("Erreur", "Erreur lors de la suppression de la recette", self)
+                    self.popUp.showMessageWith("Erreur", "Erreur lors de la suppression de la recette", self, completion: { _ in })
                 }
             }
         }
