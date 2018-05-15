@@ -88,7 +88,7 @@ class SearchRecipeController: UIViewController {
     }
     
     /// Dismiss keyboard if the user tap outside of it
-    @IBAction func dismissKeybord(_ sender: UITapGestureRecognizer) {
+    @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
         newIngredient.resignFirstResponder()
     }
 }
@@ -124,28 +124,3 @@ extension SearchRecipeController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-
-///// Extension of UITextViewDelegate to handle the place holder
-//extension SearchRecipeController: UITextFieldDelegate {
-//    /// replace the placeholder by an empty string
-//    func textFieldDidBeginEditing(_ textField: UITextField)
-//    {
-//        if (textField.text == placeholder)
-//        {
-//            textField.text = ""
-//            textField.textColor = .white
-//        }
-//        textField.becomeFirstResponder()
-//    }
-//
-//    /// Replace the empty text by a placeholder
-//    func textFieldDidEndEditing(_ textField: UITextField)
-//    {
-//        if (textField.text == "")
-//        {
-//            textField.text = placeholder
-//            textField.textColor = .gray
-//        }
-//        textField.resignFirstResponder()
-//    }
-//}

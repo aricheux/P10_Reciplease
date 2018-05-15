@@ -15,7 +15,6 @@ class ResultRecipeController: UITableViewController {
     var recipe: [Recipe] = []
     let spinnerView = SpinnerView()
     let popUp = MessagePopUp()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,11 +57,7 @@ extension ResultRecipeController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ResultRecipeCell", for: indexPath) as! ResultRecipeCell
         recipe.append(Recipe())
         recipe[indexPath.row].getSearchData(with: recipeMatches[indexPath.row]) { (result) in
-            cell.recipeTitle.text = self.recipe[indexPath.row].name
-            cell.recipeIngredient.text = self.recipe[indexPath.row].ingredientList
-            cell.recipeTime.text = self.recipe[indexPath.row].totalTime
-            cell.rateStars.rating = self.recipe[indexPath.row].rating
-            cell.recipeImage.image = self.recipe[indexPath.row].smallImage
+            cell.setupWith(recipe: self.recipe[indexPath.row])
         }
         
         return cell

@@ -140,15 +140,14 @@ extension DetailRecipeController {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeImageCell", for: indexPath) as! RecipeImageCell
-            cell.recipeImage.image = recipe.largeImage
+            cell.setupWith(recipe: recipe)
+
             return cell
             
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "RecipeInfoCell", for: indexPath) as! RecipeInfoCell
-            cell.recipeName.text = recipe.name
-            cell.recipeTime.text = recipe.totalTime
-            cell.recipeRating.rating = recipe.rating
-            cell.recipeServing.text = recipe.serving
+            cell.setupWith(recipe: recipe)
+
             return cell
             
         case 2:
@@ -159,6 +158,7 @@ extension DetailRecipeController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             cell.textLabel?.text = " - " + recipe.ingredientLines[indexPath.row]
             cell.textLabel?.textColor = UIColor.white
+            
             return cell
             
         case 4:

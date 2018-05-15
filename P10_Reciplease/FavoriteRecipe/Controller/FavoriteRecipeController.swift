@@ -50,11 +50,10 @@ class FavoriteRecipeController: UITableViewController {
 
 extension FavoriteRecipeController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if favoriteRecipe.count > 0 {
-            tableView.allowsSelection = true
+        tableView.allowsSelection = (favoriteRecipe.count > 0)
+        if (favoriteRecipe.count > 0) {
             return favoriteRecipe.count
         }
-        tableView.allowsSelection = false
         return 1
     }
     
@@ -62,12 +61,8 @@ extension FavoriteRecipeController {
         
         if favoriteRecipe.count > 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ResultRecipeCell", for: indexPath) as! ResultRecipeCell
-            
-            cell.recipeTitle.text = favoriteRecipe[indexPath.row].name
-            cell.recipeIngredient.text = favoriteRecipe[indexPath.row].ingredientList
-            cell.recipeTime.text = favoriteRecipe[indexPath.row].totalTime
-            cell.rateStars.rating = favoriteRecipe[indexPath.row].rating
-            cell.recipeImage.image = favoriteRecipe[indexPath.row].smallImage
+            cell.setupWith(recipe: favoriteRecipe[indexPath.row])
+ 
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "NoFavoriteCell", for: indexPath) as! NoFavoriteCell

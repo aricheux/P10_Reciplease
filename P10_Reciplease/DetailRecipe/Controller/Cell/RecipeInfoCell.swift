@@ -28,4 +28,11 @@ class RecipeInfoCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setupWith(recipe: Recipe) {
+        self.recipeName.text = recipe.name
+        self.recipeTime.text = recipe.totalTime
+        self.recipeRating.rating = recipe.rating
+        self.recipeServing.text = recipe.serving
+    }
+    
 }

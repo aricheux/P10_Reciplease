@@ -139,7 +139,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hch-do-uLc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="5Bg-BQ-yIk">
                     <connections>
-                        <action selector="dismissKeybord:" destination="zga-jB-KdU" id="xIf-vO-tjd"/>
+                        <action selector="dismissKeyboard:" destination="zga-jB-KdU" id="RT7-O5-TU5"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

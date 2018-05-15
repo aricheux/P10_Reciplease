@@ -29,4 +29,12 @@ class ResultRecipeCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setupWith(recipe: Recipe) {
+        self.recipeTitle.text = recipe.name
+        self.recipeIngredient.text = recipe.ingredientList
+        self.recipeTime.text = recipe.totalTime
+        self.rateStars.rating = recipe.rating
+        self.recipeImage.image = recipe.smallImage
+    }
+    
 }

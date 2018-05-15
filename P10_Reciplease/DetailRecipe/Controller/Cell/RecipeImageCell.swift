@@ -23,4 +23,8 @@ class RecipeImageCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setupWith(recipe: Recipe) {
+        self.recipeImage.image = recipe.largeImage
+    }
+    
 }
