@@ -67,8 +67,10 @@ class DetailRecipeController: UITableViewController {
                     self.spinnerView.removeLoadingScreen()
                 }
             } else {
-                self.popUp.showMessageWith("Erreur", "Erreur lors du chargement de la recette", self, completion: { (choice) in
-                    if choice == .OkPushed {
+                self.popUp.showMessageWith("Erreur", "Erreur lors du chargement de la recette", self, .RetryButton, completion: { (choice) in
+                    if choice == .RetryPushed {
+                        self.navigationController?.popViewController(animated: true)
+                    } else if choice == .CancelPushed {
                         self.navigationController?.popViewController(animated: true)
                     }
                 })
@@ -88,7 +90,7 @@ class DetailRecipeController: UITableViewController {
                 if success {
                     self.starView.rating = 1
                 } else {
-                    self.popUp.showMessageWith("Erreur", "Erreur lors de la sauvegarde de la recette", self, completion: { _ in })
+                    self.popUp.showMessageWith("Erreur", "Erreur lors de la sauvegarde de la recette", self, .OkButton, completion: { _ in })
                 }
             }
         } else {
@@ -97,7 +99,7 @@ class DetailRecipeController: UITableViewController {
                     self.starView.rating = 0
                     self.navigationController?.popViewController(animated: true)
                 } else {
-                    self.popUp.showMessageWith("Erreur", "Erreur lors de la suppression de la recette", self, completion: { _ in })
+                    self.popUp.showMessageWith("Erreur", "Erreur lors de la suppression de la recette", self, .OkButton, completion: { _ in })
                 }
             }
         }

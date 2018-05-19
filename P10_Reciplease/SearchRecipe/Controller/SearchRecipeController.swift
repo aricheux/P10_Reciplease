@@ -19,10 +19,6 @@ class SearchRecipeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // To delete
-        RecipeManager.sharedInstance.addIngredient("eggs")
-        RecipeManager.sharedInstance.addIngredient("cheese")
-        
         setupIngredientTextStyle()
         setupBottomBorder()
         setupTableView()
@@ -37,7 +33,12 @@ class SearchRecipeController: UIViewController {
                     self.newIngredient.filterStrings(ingredients)
                 }
             } catch {
-                // handle error
+                self.popUp.showMessageWith("Erreur", "Erreur lors de la récupération de la liste", self, .RetryButton, completion: { (choice) in
+                    
+                    if choice == .RetryPushed {
+                        self.setupIngredientTextStyle()
+                    }
+                })
             }
         }
         
@@ -60,6 +61,7 @@ class SearchRecipeController: UIViewController {
     }
     
     func setupTableView() {
+        searchTable.accessibilityIdentifier = "ingredientTable"
         searchTable.tableFooterView = UIView()
         searchTable.register(UINib(nibName: "SearchClearCell", bundle: nil), forCellReuseIdentifier: "SearchClearCell")
         searchTable.register(UINib(nibName: "SearchRecipeCell", bundle: nil), forCellReuseIdentifier: "SearchRecipeCell")
@@ -77,7 +79,7 @@ class SearchRecipeController: UIViewController {
             newIngredient.text = ""
             searchTable.reloadData()
         } else {
-            self.popUp.showMessageWith("Erreur", "Veuillez renseigner un ingrédient", self, completion: { _ in })
+            self.popUp.showMessageWith("Erreur", "Veuillez renseigner un ingrédient", self, .OkButton, completion: { _ in })
         }
     }
     

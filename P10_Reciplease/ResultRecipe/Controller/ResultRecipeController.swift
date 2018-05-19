@@ -26,6 +26,7 @@ class ResultRecipeController: UITableViewController {
     func setupContent() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Result", style: .plain, target: nil, action: nil)
         spinnerView.setLoadingScreen(tableView: tableView, navigationController: navigationController)
+        tableView.accessibilityIdentifier = "resultTable"
         tableView.tableFooterView = UIView()
         tableView.register(UINib(nibName: "ResultRecipeCell", bundle: nil), forCellReuseIdentifier: "ResultRecipeCell")
     }
@@ -38,7 +39,13 @@ class ResultRecipeController: UITableViewController {
                 self.tableView.reloadData()
                 self.spinnerView.removeLoadingScreen()
             } else {
-                self.popUp.showMessageWith("Erreur", "Erreur lors du chargement de la recette", self, completion: { _ in })
+                self.popUp.showMessageWith("Erreur", "Erreur lors du chargement des résultats", self, .RetryButton, completion: { (choice) in
+                    if choice == .RetryPushed {
+                        self.getContent()
+                    } else if choice == .CancelPushed {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                })
             }
         }
     }
@@ -57,7 +64,17 @@ extension ResultRecipeController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ResultRecipeCell", for: indexPath) as! ResultRecipeCell
         recipe.append(Recipe())
         recipe[indexPath.row].getSearchData(with: recipeMatches[indexPath.row]) { (result) in
-            cell.setupWith(recipe: self.recipe[indexPath.row])
+            if (result == true) {
+                cell.setupWith(recipe: self.recipe[indexPath.row])
+            } else {
+                self.popUp.showMessageWith("Erreur", "Erreur lors du chargement de la recette", self, .RetryButton, completion: { (choice) in
+                    if choice == .RetryPushed {
+                        self.getContent()
+                    } else if choice == .CancelPushed {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                })
+            }
         }
         
         return cell
