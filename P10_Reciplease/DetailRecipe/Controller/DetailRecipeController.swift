@@ -36,6 +36,7 @@ class DetailRecipeController: UITableViewController {
         setupFavoriteItem()
         
         tableView.tableFooterView = UIView()
+        tableView.accessibilityIdentifier = "detailTable"
         tableView.register(UINib(nibName: "RecipeImageCell", bundle: nil), forCellReuseIdentifier: "RecipeImageCell")
         tableView.register(UINib(nibName: "RecipeInfoCell", bundle: nil), forCellReuseIdentifier: "RecipeInfoCell")
         tableView.register(UINib(nibName: "RecipeWebCell", bundle: nil), forCellReuseIdentifier: "RecipeWebCell")
@@ -69,7 +70,7 @@ class DetailRecipeController: UITableViewController {
             } else {
                 self.popUp.showMessageWith("Erreur", "Erreur lors du chargement de la recette", self, .RetryButton, completion: { (choice) in
                     if choice == .RetryPushed {
-                        self.navigationController?.popViewController(animated: true)
+                        self.getContent()
                     } else if choice == .CancelPushed {
                         self.navigationController?.popViewController(animated: true)
                     }

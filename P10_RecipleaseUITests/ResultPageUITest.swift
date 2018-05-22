@@ -32,7 +32,7 @@ class ResultPageUITest: XCTestCase {
     
     func test_ResultPage() {
         SearchRecipeAndGoToResultPage()
-        ResultCellAndGoToDetailRecipe()
+        CheckResultAndGoToDetailRecipe()
     }
     
     func SearchRecipeAndGoToResultPage(){
@@ -51,7 +51,7 @@ class ResultPageUITest: XCTestCase {
         app.buttons["Add"].tap()
     }
     
-    func ResultCellAndGoToDetailRecipe(){
+    func CheckResultAndGoToDetailRecipe(){
         if let table = resultTable {
             let recipeTwo = table.cells.element(boundBy: 1)
             XCTAssertTrue(recipeTwo.staticTexts["Cheese Eggs"].exists)

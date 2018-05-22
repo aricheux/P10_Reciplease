@@ -13,6 +13,7 @@ import SwiftyJSON
 class FavoriteRecipeController: UITableViewController {
     
     var favoriteRecipe: [Recipe] = []
+    let popUp = MessagePopUp()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,7 @@ class FavoriteRecipeController: UITableViewController {
     
     func setupContent() {
         tableView.tableFooterView = UIView()
+        tableView.accessibilityIdentifier = "favoriteTable"
         tableView.register(UINib(nibName: "ResultRecipeCell", bundle: nil), forCellReuseIdentifier: "ResultRecipeCell")
         tableView.register(UINib(nibName: "NoFavoriteCell", bundle: nil), forCellReuseIdentifier: "NoFavoriteCell")
     }
@@ -76,6 +78,18 @@ extension FavoriteRecipeController {
         let vc = mainStoryboard.instantiateViewController(withIdentifier: "DetailRecipe") as! DetailRecipeController
         vc.recipe = favoriteRecipe[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {        
+        if editingStyle == .delete {
+            RecipeManager.sharedInstance.deleteFromCoreData(favoriteRecipe[indexPath.row]){ (success) in
+                if success {
+                    self.getContent()
+                } else {
+                    self.popUp.showMessageWith("Erreur", "Erreur lors de la suppression de la recette", self, .OkButton, completion: { _ in })
+                }
+            }
+        }
     }
 }
 

@@ -49,6 +49,14 @@ class ResultRecipeController: UITableViewController {
             }
         }
     }
+    
+    func addRecipeInFavorite(_ recipe: Recipe) {
+        RecipeManager.sharedInstance.saveToCoreData(recipe) { (success) in
+            if !success {
+                self.popUp.showMessageWith("Erreur", "Erreur lors de la sauvegarde de la recette", self, .OkButton, completion: { _ in })
+            }
+        }
+    }
 }
 
 extension ResultRecipeController {
@@ -85,5 +93,20 @@ extension ResultRecipeController {
         let vc = mainStoryboard.instantiateViewController(withIdentifier: "DetailRecipe") as! DetailRecipeController
         vc.recipe = self.recipe[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView,leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+    {
+        let favoriteAction = UIContextualAction(style: .normal, title:  "Favorite", handler: {  (_,_,success) in
+            if !RecipeManager.sharedInstance.recipeIsFavorite(self.recipe[indexPath.row].id) {
+                self.addRecipeInFavorite(self.recipe[indexPath.row])
+            }
+            success(true)
+        })
+        favoriteAction.image = #imageLiteral(resourceName: "star")
+        favoriteAction.backgroundColor = #colorLiteral(red: 0.2784313725, green: 0.5803921569, blue: 0.3725490196, alpha: 1)
+        
+        return UISwipeActionsConfiguration(actions: [favoriteAction])
+        
     }
 }

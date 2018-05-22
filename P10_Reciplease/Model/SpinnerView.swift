@@ -9,13 +9,20 @@
 import Foundation
 import UIKit
 
+/// Class to handle the spinner view
 class SpinnerView {
-    
+    /// A view who contain all spinner view
     let loadingView = UIView()
+    /// a UIActivityIndicatorView
     let spinner = UIActivityIndicatorView()
+    /// A label with loading text
     let loadingLabel = UILabel()
     
-    // Set the activity indicator into the main view
+    /// Set the activity indicator into the main view
+    ///
+    /// - Parameters:
+    ///   - tableView: <#tableView description#>
+    ///   - navigationController: <#navigationController description#>
     func setLoadingScreen(tableView: UITableView, navigationController: UINavigationController?) {
         if let nav = navigationController {
             let width: CGFloat = 120
@@ -39,6 +46,7 @@ class SpinnerView {
         }
     }
     
+    ///
     func removeLoadingScreen() {
         spinner.stopAnimating()
         spinner.isHidden = true

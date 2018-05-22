@@ -9,56 +9,33 @@ import Foundation
 import SwiftyJSON
 import CoreData
 
-enum RecipeType {
-    case Search
-    case Detail
-}
-
-///
-class Recipe: NSObject, NSCoding {
+/// Class to handle the recipe from Yummly
+class Recipe {
+    /// A string who contain the name of the recipe
     var name: String
+    /// A string who contain the id of the recipe
     var id: String
+    /// A string who contain the url of the image description
     var imageUrl: String
+    /// An array of string who contain all ingredient to make the recipe
     var ingredientLines: [String]
+    /// A string who contain all ingredients in one line
     var ingredientList: String
+    /// A double who contain the number of stars
     var rating: Double
+    /// A string who contain the total time to make the recipe
     var totalTime: String
+    /// An UIImage who contain the small image decription
     var smallImage: UIImage
+    /// An UIImage who contain the large image description
     var largeImage: UIImage
+    /// A string who contain the url of the website
     var sourceRecipeUrl: String
+    /// A string who contain the number of portion
     var serving: String
     
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.name, forKey: "name")
-        aCoder.encode(self.ingredientLines, forKey: "ingredientLines")
-        aCoder.encode(self.ingredientList, forKey: "ingredientList")
-        aCoder.encode(self.rating, forKey: "rating")
-        aCoder.encode(self.totalTime, forKey: "totalTime")
-        aCoder.encode(self.largeImage, forKey: "smallImage")
-        aCoder.encode(self.largeImage, forKey: "largeImage")
-        aCoder.encode(self.sourceRecipeUrl, forKey: "sourceRecipeUrl")
-        aCoder.encode(self.serving, forKey: "serving")
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        guard let name = aDecoder.decodeObject(forKey: "name") as? String, let id = aDecoder.decodeObject(forKey: "id") as? String, let imageUrl = aDecoder.decodeObject(forKey: "imageUrl") as? String, let ingredientLines = aDecoder.decodeObject(forKey: "ingredientLines") as? [String], let ingredientList = aDecoder.decodeObject(forKey: "ingredientList") as? String, let rating = aDecoder.decodeObject(forKey: "rating") as? Double, let totalTime = aDecoder.decodeObject(forKey: "totalTime") as? String, let smallImage = aDecoder.decodeObject(forKey: "smallImage") as? UIImage, let largeImage = aDecoder.decodeObject(forKey: "largeImage") as? UIImage, let sourceRecipeUrl = aDecoder.decodeObject(forKey: "sourceRecipeUrl") as? String, let serving = aDecoder.decodeObject(forKey: "serving") as? String else {
-                return nil
-        }
-        
-        self.name = name
-        self.id = id
-        self.imageUrl = imageUrl
-        self.ingredientLines = ingredientLines
-        self.ingredientList = ingredientList
-        self.rating = rating
-        self.totalTime = totalTime
-        self.smallImage = smallImage
-        self.largeImage = largeImage
-        self.sourceRecipeUrl = sourceRecipeUrl
-        self.serving = serving
-    }
-    
-    override init() {
+    /// Initial the class with default value
+    init() {
         self.name = ""
         self.id = ""
         self.imageUrl = ""
@@ -72,6 +49,11 @@ class Recipe: NSObject, NSCoding {
         self.serving = ""
     }
     
+    /// Initialize all search attributs with the JSON
+    ///
+    /// - Parameters:
+    ///   - json: JSON data from the search request
+    ///   - completion: status to know if the request is success
     func getSearchData(with json: JSON, completion: @escaping (Bool) -> ()) {
         self.name = json["recipeName"].stringValue
         self.id = json["id"].stringValue
@@ -108,6 +90,11 @@ class Recipe: NSObject, NSCoding {
         }
     }
     
+    /// Initialize all detail attributs with the JSON
+    ///
+    /// - Parameters:
+    ///   - json: JSON data from the detail request
+    ///   - completion: status to know if the request is success
     func getDetailData(with json: JSON, completion: @escaping (Bool) -> ()) {
         self.imageUrl = json["images"][0]["hostedLargeUrl"].stringValue
         self.imageUrl = self.imageUrl.replacingOccurrences(of: "\\", with: "")
@@ -128,9 +115,11 @@ class Recipe: NSObject, NSCoding {
                 }
             }
         }
-        
     }
     
+    /// Get all attributs from the core data recipe
+    ///
+    /// - Parameter object: favorite recipe object
     func getDataFromCoreData(with object: NSManagedObject) {
         self.name = object.value(forKey: "name") as! String
         self.id = object.value(forKey: "id") as! String

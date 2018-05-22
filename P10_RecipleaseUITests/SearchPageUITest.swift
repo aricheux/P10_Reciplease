@@ -31,10 +31,10 @@ class SearchPageUITest: XCTestCase {
     
     func test_SearchPage() {
         showPopupIfAddEmptyIngredient()
-        AddTwoIngredientWithList()
-        ClearAllIngredients()
-        AddTwoIngredientWithList()
-        SearchRecipe()
+        addTwoIngredientWithList()
+        clearAllIngredients()
+        addTwoIngredientWithList()
+        searchRecipe()
     }
     
     func showPopupIfAddEmptyIngredient() {
@@ -45,7 +45,7 @@ class SearchPageUITest: XCTestCase {
         okButton.tap()
     }
     
-    func AddTwoIngredientWithList() {
+    func addTwoIngredientWithList() {
         addIngredient("Eggs")
         addIngredient("Cheese")
         
@@ -63,14 +63,14 @@ class SearchPageUITest: XCTestCase {
         app.buttons["Add"].tap()
     }
     
-    func ClearAllIngredients() {
+    func clearAllIngredients() {
         if let table = ingredientTable {
             table.cells.element(boundBy: 0).buttons["Clear"].tap()
             XCTAssertTrue(table.cells.count == 1)
         }
     }
     
-    func SearchRecipe(){
+    func searchRecipe(){
         app.buttons["Search for recipe"].tap()
         sleep(1)
         XCTAssert(app.navigationBars["Recipe result"].exists)

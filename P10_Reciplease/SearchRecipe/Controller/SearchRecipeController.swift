@@ -19,12 +19,13 @@ class SearchRecipeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getJsonList()
         setupIngredientTextStyle()
         setupBottomBorder()
         setupTableView()
     }
     
-    func setupIngredientTextStyle() {
+    func getJsonList(){
         if let path = Bundle.main.path(forResource: "ingredient", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
@@ -41,7 +42,9 @@ class SearchRecipeController: UIViewController {
                 })
             }
         }
-        
+    }
+    
+    func setupIngredientTextStyle() {
         newIngredient.theme.bgColor = UIColor.white
         newIngredient.theme.fontColor = UIColor.black
         newIngredient.theme.font = UIFont.systemFont(ofSize: 15)
