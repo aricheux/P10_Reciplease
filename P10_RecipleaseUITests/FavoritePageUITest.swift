@@ -32,21 +32,21 @@ class FavoritePageUITest: XCTestCase {
     }
     
     func test_ResultPage() {
-        ShowEmptyCellIfNoFavorite()
-        SearchRecipeAndGoToResultPage()
-        AddRecipeInFavorite()
-        CheckIfFavoriteExistAndDelete()
-        ShowEmptyCellIfNoFavorite()
+        showEmptyCellIfNoFavorite()
+        searchRecipeAndGoToResultPage()
+        addRecipeInFavorite()
+        checkIfFavoriteExistAndDelete()
+        showEmptyCellIfNoFavorite()
     }
     
-    func ShowEmptyCellIfNoFavorite() {
+    func showEmptyCellIfNoFavorite() {
         app.tabBars.buttons["Favorites"].tap()
         if let table = favoriteTable {
             XCTAssertTrue(table.cells.element(boundBy: 0).staticTexts["Aucun favori enregistré"].exists)
         }
     }
     
-    func SearchRecipeAndGoToResultPage(){
+    func searchRecipeAndGoToResultPage(){
         app.tabBars.buttons["Search"].tap()
         addIngredient("Eggs")
         addIngredient("Cheese")
@@ -63,7 +63,7 @@ class FavoritePageUITest: XCTestCase {
         app.buttons["Add"].tap()
     }
     
-    func AddRecipeInFavorite() {
+    func addRecipeInFavorite() {
         app.tables["resultTable"].cells.element(boundBy: 1).tap()
         if let table = detailTable {
             XCTAssertTrue(table.cells.element(boundBy: 1).staticTexts["Cheese Eggs"].exists)
@@ -73,7 +73,7 @@ class FavoritePageUITest: XCTestCase {
         app.tables["resultTable"].cells.element(boundBy: 1).tap()
     }
     
-    func CheckIfFavoriteExistAndDelete() {
+    func checkIfFavoriteExistAndDelete() {
         app.tabBars.buttons["Favorites"].tap()
         if let table = favoriteTable {
             XCTAssertTrue(table.cells.element(boundBy: 0).staticTexts["Cheese Eggs"].exists)

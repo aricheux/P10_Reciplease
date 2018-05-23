@@ -8,8 +8,9 @@
 
 import UIKit
 
+/// Class to handle the RecipeImageCell
 class RecipeImageCell: UITableViewCell {
-    
+    /// Large image description of the recipe
     @IBOutlet weak var recipeImage: UIImageView!
     
     override func awakeFromNib() {
@@ -23,6 +24,7 @@ class RecipeImageCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    /// Setup the cell with the recipe object
     func setupWith(recipe: Recipe) {
         self.recipeImage.image = recipe.largeImage
     }

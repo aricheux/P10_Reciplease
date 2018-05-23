@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Class to handle the RecipeHeaderCell
 class RecipeHeaderCell: UITableViewCell {
 
     override func awakeFromNib() {

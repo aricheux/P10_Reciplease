@@ -8,7 +8,9 @@
 
 import UIKit
 
+/// Class to handle the SearchClearCell
 class SearchClearCell: UITableViewCell {
+    /// Clear button to remove all ingredient
     @IBOutlet weak var clearIngredient: UIButton!
     
     override func awakeFromNib() {

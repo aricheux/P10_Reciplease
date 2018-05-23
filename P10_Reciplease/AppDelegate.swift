@@ -15,9 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
 
         return true
+    }
+    
+    /// Load core data when the app become active
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        RecipeManager.sharedInstance.loadFromCoreData(completion: { _ in })
     }
     
     /// Create the persistent container to access to the core data

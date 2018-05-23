@@ -11,29 +11,37 @@ import SwiftyJSON
 import CoreData
 import Cosmos
 
+/// Class to handle the DetailRecipeController
 class DetailRecipeController: UITableViewController {
-    
+    /// Current recipe of the detail view
     var recipe = Recipe()
+    /// star image for the nav bar item
     let starView = CosmosView()
+    /// Spinner view when the table view loading
     let spinnerView = SpinnerView()
+    /// Define the number section only when data is loaded
     var numberOfSection: Int?
+    /// Define a pop-up to alert the user
     let popUp = MessagePopUp()
     
+    /// Do action when the view is loaded
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupContent()
+        setupFavoriteItem()
         getContent()
     }
     
+    /// Get content when the view appear again
     override func viewWillAppear(_ animated: Bool) {
         getContent()
     }
     
+    /// Setup spinner view and register of the table view xib
     func setupContent() {
         spinnerView.setLoadingScreen(tableView: tableView, navigationController: navigationController)
         numberOfSection = 0
-        setupFavoriteItem()
         
         tableView.tableFooterView = UIView()
         tableView.accessibilityIdentifier = "detailTable"
@@ -43,6 +51,7 @@ class DetailRecipeController: UITableViewController {
         tableView.register(UINib(nibName: "RecipeHeaderCell", bundle: nil), forCellReuseIdentifier: "RecipeHeaderCell")
     }
     
+    /// Setup the star view and add it to the rightBarButtonItem
     func setupFavoriteItem() {
         starView.settings.totalStars = 1
         starView.settings.starSize = 25
@@ -54,6 +63,7 @@ class DetailRecipeController: UITableViewController {
         navigationItem.rightBarButtonItem = favoriteItem
     }
     
+    /// Send the request to yummly and get the detail data
     func getContent() {
         RecipeManager.sharedInstance.getRecipeDetail(with: recipe.id) { (jsonResult, error) in
             if error == nil {
@@ -79,12 +89,14 @@ class DetailRecipeController: UITableViewController {
         }
     }
     
+    /// Show the web page of the original recipe
     @objc func showWebRecipe(_ sender: UIButton){
         if let url = URL(string: recipe.sourceRecipeUrl) {
             UIApplication.shared.open(url, options: [:])
         }
     }
     
+    /// Add the recipe in favorite or delete it
     @objc func favoriteTapped() {
         if self.starView.rating == 0 {
             RecipeManager.sharedInstance.saveToCoreData(self.recipe) { (success) in
@@ -107,12 +119,15 @@ class DetailRecipeController: UITableViewController {
     }
 }
 
+/// Handle methode of UITableViewDelegate and UITableViewDataSource
 extension DetailRecipeController {
     
+    /// Define the number of section
     override func numberOfSections(in tableView: UITableView) -> Int {
         return numberOfSection ?? 0
     }
     
+    /// Define the number of row by section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 3 {
             return recipe.ingredientLines.count
@@ -121,6 +136,7 @@ extension DetailRecipeController {
         }
     }
     
+    /// Define the height of the cell according to the section
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
@@ -138,6 +154,7 @@ extension DetailRecipeController {
         }
     }
     
+    /// Create and configure the cell with xib according the section index
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.section {

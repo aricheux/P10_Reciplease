@@ -10,12 +10,16 @@ import UIKit
 import SwiftyJSON
 import SearchTextField
 
+/// Class to handle the SearchRecipeController
 class SearchRecipeController: UIViewController {
-    
+    /// new ingredient to added in the list
     @IBOutlet weak var newIngredient: SearchTextField!
+    /// TableView who contain all ingredients in list
     @IBOutlet weak var searchTable: UITableView!
+    /// Define a pop-up to alert the user
     let popUp = MessagePopUp()
     
+    /// Do action when the view is loaded
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,6 +29,7 @@ class SearchRecipeController: UIViewController {
         setupTableView()
     }
     
+    /// Get the completion list of the SearchTextField from the json file
     func getJsonList(){
         if let path = Bundle.main.path(forResource: "ingredient", ofType: "json") {
             do {
@@ -44,6 +49,7 @@ class SearchRecipeController: UIViewController {
         }
     }
     
+    /// Define style of the SearchTextField
     func setupIngredientTextStyle() {
         newIngredient.theme.bgColor = UIColor.white
         newIngredient.theme.fontColor = UIColor.black
@@ -54,6 +60,7 @@ class SearchRecipeController: UIViewController {
         newIngredient.theme.placeholderColor = UIColor.lightGray
     }
     
+    /// Setup a bottom border for the SearchTextField
     func setupBottomBorder(){
         let bottomBorder = CALayer()
         bottomBorder.borderColor = UIColor.white.cgColor
@@ -63,6 +70,7 @@ class SearchRecipeController: UIViewController {
         newIngredient.layer.addSublayer(bottomBorder)
     }
     
+    /// Setup the tableView and register all xib
     func setupTableView() {
         searchTable.accessibilityIdentifier = "ingredientTable"
         searchTable.tableFooterView = UIView()
@@ -71,11 +79,13 @@ class SearchRecipeController: UIViewController {
         searchTable.reloadData()
     }
     
+    /// Clear all ingredient in the list
     @objc func clearList(_ sender: Any) {
         RecipeManager.sharedInstance.clearIngredientList()
         searchTable.reloadData()
     }
     
+    /// Add ingredient to the search list
     @IBAction func addIngredientToList(_ sender: Any) {
         if let ingredient = newIngredient.text, !ingredient.isEmpty {
             RecipeManager.sharedInstance.addIngredient(ingredient)
@@ -86,6 +96,7 @@ class SearchRecipeController: UIViewController {
         }
     }
     
+    /// Go to result page to see recipe result
     @IBAction func goToResultPage( _ sender: Any){
         let mainStoryboard : UIStoryboard = UIStoryboard(name: "ResultRecipe", bundle:nil)
         let vc = mainStoryboard.instantiateViewController(withIdentifier: "ResultRecipe") as! ResultRecipeController
@@ -98,11 +109,15 @@ class SearchRecipeController: UIViewController {
     }
 }
 
+/// Handle methode of UITableViewDelegate and UITableViewDataSource
 extension SearchRecipeController: UITableViewDelegate, UITableViewDataSource {
+    
+    /// Define the number of section
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
+    /// Define the number of row by section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 1 {
             return RecipeManager.sharedInstance.ingredients.count
@@ -111,6 +126,7 @@ extension SearchRecipeController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    /// Create the tableView cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:

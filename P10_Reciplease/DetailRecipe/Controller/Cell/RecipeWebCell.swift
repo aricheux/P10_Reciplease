@@ -8,8 +8,9 @@
 
 import UIKit
 
+/// Class to handle the RecipeWebCell
 class RecipeWebCell: UITableViewCell {
-
+    /// button to go to the web page of the recipe
     @IBOutlet weak var getDirectionButton: UIButton!
     
     override func awakeFromNib() {
@@ -19,7 +20,6 @@ class RecipeWebCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
     

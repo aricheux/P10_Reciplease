@@ -9,12 +9,17 @@
 import UIKit
 import Cosmos
 
+/// Class to handle the ResultRecipeCell
 class ResultRecipeCell: UITableViewCell {
-    
+    /// title of the recipe
     @IBOutlet weak var recipeTitle: UILabel!
+    /// ingredient list of the recipe
     @IBOutlet weak var recipeIngredient: UILabel!
+    /// Image description of the recipe
     @IBOutlet weak var recipeImage: UIImageView!
+    /// Number of stars according to the rating of the recipe
     @IBOutlet weak var rateStars: CosmosView!
+    /// time needed to do the recipe
     @IBOutlet weak var recipeTime: UILabel!
 
     override func awakeFromNib() {
@@ -29,6 +34,7 @@ class ResultRecipeCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    /// Setup the cell with the recipe object
     func setupWith(recipe: Recipe) {
         self.recipeTitle.text = recipe.name
         self.recipeIngredient.text = recipe.ingredientList

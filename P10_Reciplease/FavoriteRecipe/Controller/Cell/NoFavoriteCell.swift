@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Class to handle the NoFavoriteCell
 class NoFavoriteCell: UITableViewCell {
 
     override func awakeFromNib() {

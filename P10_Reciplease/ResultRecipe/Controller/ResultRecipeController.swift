@@ -9,13 +9,18 @@
 import UIKit
 import SwiftyJSON
 
+/// Class to handle the ResultRecipeController
 class ResultRecipeController: UITableViewController {
-    
+    /// JSON data from yummly request
     var recipeMatches: JSON?
+    /// Array who contain all recipe from yummly
     var recipe: [Recipe] = []
+    /// Spinner view when the table view loading
     let spinnerView = SpinnerView()
+    /// Define a pop-up to alert the user
     let popUp = MessagePopUp()
     
+    /// Do action when the view is loaded
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +28,7 @@ class ResultRecipeController: UITableViewController {
         getContent()
     }
     
+    /// Setup navigation item and tableView
     func setupContent() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Result", style: .plain, target: nil, action: nil)
         spinnerView.setLoadingScreen(tableView: tableView, navigationController: navigationController)
@@ -31,6 +37,7 @@ class ResultRecipeController: UITableViewController {
         tableView.register(UINib(nibName: "ResultRecipeCell", bundle: nil), forCellReuseIdentifier: "ResultRecipeCell")
     }
     
+    /// Send the request and get the data from yummly
     func getContent() {
         RecipeManager.sharedInstance.searchRecipe() { (jsonResult, error) in
             if error == nil {
@@ -50,6 +57,7 @@ class ResultRecipeController: UITableViewController {
         }
     }
     
+    /// Add the selected recipe in favorite
     func addRecipeInFavorite(_ recipe: Recipe) {
         RecipeManager.sharedInstance.saveToCoreData(recipe) { (success) in
             if !success {
@@ -59,11 +67,15 @@ class ResultRecipeController: UITableViewController {
     }
 }
 
+/// Handle methode of UITableViewDelegate and UITableViewDataSource
 extension ResultRecipeController {
+    
+    /// Define the number of row by section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recipeMatches?.count ?? 0
     }
     
+    /// Create the tableView cell with xib
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let recipeMatches = recipeMatches else {
             return UITableViewCell()
@@ -88,6 +100,7 @@ extension ResultRecipeController {
         return cell
     }
     
+    /// Send recipe data and push the new view controller when the cell is selected
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let mainStoryboard : UIStoryboard = UIStoryboard(name: "DetailRecipe", bundle:nil)
         let vc = mainStoryboard.instantiateViewController(withIdentifier: "DetailRecipe") as! DetailRecipeController
@@ -95,8 +108,13 @@ extension ResultRecipeController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    override func tableView(_ tableView: UITableView,leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
-    {
+    /// Enable insert swipe to add in favorite
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .insert
+    }
+    
+    /// Configure the action when the user swipe to add in favorite
+    override func tableView(_ tableView: UITableView,leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let favoriteAction = UIContextualAction(style: .normal, title:  "Favorite", handler: {  (_,_,success) in
             if !RecipeManager.sharedInstance.recipeIsFavorite(self.recipe[indexPath.row].id) {
                 self.addRecipeInFavorite(self.recipe[indexPath.row])
@@ -104,9 +122,12 @@ extension ResultRecipeController {
             success(true)
         })
         favoriteAction.image = #imageLiteral(resourceName: "star")
-        favoriteAction.backgroundColor = #colorLiteral(red: 0.2784313725, green: 0.5803921569, blue: 0.3725490196, alpha: 1)
+        if RecipeManager.sharedInstance.recipeIsFavorite(self.recipe[indexPath.row].id) {
+            favoriteAction.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        } else {
+            favoriteAction.backgroundColor = #colorLiteral(red: 0.2784313725, green: 0.5803921569, blue: 0.3725490196, alpha: 1)
+        }
         
         return UISwipeActionsConfiguration(actions: [favoriteAction])
-        
     }
 }
