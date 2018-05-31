@@ -100,7 +100,7 @@ class RecipeManager {
     
     /// Clear all ingredients in the search list
     func clearIngredientList() {
-        ingredients = []
+        ingredients.removeAll()
         ingredientList = ""
     }
     

@@ -51,7 +51,7 @@ class FavoritePageUITest: XCTestCase {
         addIngredient("Eggs")
         addIngredient("Cheese")
         app.buttons["Search for recipe"].tap()
-        sleep(1)
+        sleep(3)
         XCTAssert(app.navigationBars["Recipe result"].exists)
     }
     
